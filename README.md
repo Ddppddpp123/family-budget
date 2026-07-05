@@ -1,22 +1,4 @@
-# Ledger
+Ledger v9 Server Cloud
 
-מערכת ניהול תקציב חודשית פשוטה.
-
-## קבצים
-
-- `index.html` - קובץ האתר הראשי
-- `css/style.css` - עיצוב
-- `js/config.js` - הגדרות Supabase אופציונליות
-- `js/app.js` - לוגיקת האפליקציה
-- `supabase/schema.sql` - טבלת שמירה בענן
-
-## שימוש
-
-1. מעלים את הקבצים ל-GitHub Pages.
-2. פותחים את האתר.
-3. אפשר לעבוד מקומית מיד.
-4. לחיבור ענן: מריצים את `supabase/schema.sql`, ואז מזינים URL ו-anon key במסך הגדרות.
-
-## גיבוי
-
-גם לפני חיבור Supabase, האפליקציה שומרת בדפדפן. מומלץ להוריד גיבוי JSON ממסך "גיבוי".
+This version uses Netlify Functions as a server-side bridge to Supabase.
+Do not put the service role key in the browser. Put it only in Netlify environment variables.

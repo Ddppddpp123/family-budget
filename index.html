@@ -2,58 +2,141 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ledger</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ledger v9</title>
+    <style>
+    :root{--bg:#f4f7fb;--panel:#fff;--ink:#0f172a;--muted:#667085;--line:#dbe3ef;--blue:#2563eb;--green:#059669;--red:#dc2626;--amber:#b45309;--nav:#0f172a}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,'Noto Sans Hebrew',sans-serif;color:var(--ink)}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{background:var(--nav);color:#fff;padding:24px;position:sticky;top:0;height:100vh}.brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}.logo{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:grid;place-items:center;font-size:28px;font-weight:900}.brand h1{margin:0;font-size:30px}.brand p{margin:4px 0 0;color:#cbd5e1}.nav{display:grid;gap:10px}.nav button{border:0;background:transparent;color:#dbeafe;text-align:right;padding:14px 16px;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer}.nav button.active,.nav button:hover{background:#293449;color:#fff}.cloudBadge{margin-top:28px;padding:14px;border-radius:16px;background:#172338;color:#dbeafe;line-height:1.6}.cloudBadge.good{background:#064e3b}.cloudBadge.bad{background:#7f1d1d}.main{padding:30px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}.title small{display:block;color:var(--blue);font-weight:900;letter-spacing:.08em}.title h2{margin:8px 0 6px;font-size:38px}.title p{margin:0;color:var(--muted)}.month{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 10px 30px rgba(15,23,42,.05)}.month button{width:44px;height:44px;border:0;border-radius:14px;background:#eef4ff;color:#1d4ed8;font-size:25px;font-weight:900;cursor:pointer}.month b{min-width:130px;text-align:center}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 14px 35px rgba(15,23,42,.06)}.card h3{margin:0 0 12px;color:var(--muted);font-size:15px}.big{font-size:32px;font-weight:900}.green{color:var(--green)}.red{color:var(--red)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:center}.row.wide{grid-template-columns:1.2fr 1.2fr 1fr 1fr 1fr 1.3fr auto}.row.head{font-weight:900;color:#475467;border-bottom:1px solid var(--line);padding-bottom:8px}.row input,.row select,textarea,.cloud input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;font-size:15px}.btn{border:0;border-radius:13px;padding:12px 16px;font-weight:900;cursor:pointer;background:#e2e8f0;color:#0f172a}.btn.primary{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff}.btn.red{background:#fee2e2;color:#991b1b}.btn.amber{background:#fef3c7;color:#92400e}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:7px 12px;font-weight:800;background:#eef2ff;color:#3730a3}.catdot,.memdot{width:12px;height:12px;border-radius:50%;display:inline-block}.tablewrap{overflow:auto}.txrow{min-width:1120px}.hidden{display:none}.hint{padding:14px;border:1px dashed #93c5fd;background:#eff6ff;color:#1e40af;border-radius:14px;line-height:1.7}.warn{padding:14px;border:1px dashed #f59e0b;background:#fffbeb;color:#92400e;border-radius:14px;line-height:1.7}.log{direction:ltr;text-align:left;background:#0b1220;color:#dbeafe;border-radius:14px;padding:14px;height:160px;overflow:auto;font-family:Consolas,monospace;font-size:13px}.section{display:grid;gap:18px}.input2{display:grid;grid-template-columns:2fr 1fr auto;gap:10px;margin-bottom:16px}.colorTag{border-radius:999px;padding:6px 10px;font-weight:900;color:#fff}.drop{border:2px dashed #bfdbfe;border-radius:18px;padding:24px;text-align:center;background:#eff6ff}.summaryList{display:grid;gap:10px}.bar{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4)}
+    @media(max-width:1000px){.app{display:block}.side{position:static;height:auto}.cards,.grid2{grid-template-columns:1fr}.main{padding:18px}.top{display:block}.month{width:max-content;margin-bottom:16px}}
+  </style>
 </head>
 <body>
-  <div id="app" class="app">
-    <aside class="sidebar">
-      <div class="logo-row">
-        <div class="logo">L</div>
-        <div>
-          <h1>Ledger</h1>
-          <p>ניהול חודשי פשוט</p>
-        </div>
-      </div>
-      <nav class="nav">
-        <button class="nav-item active" data-screen="dashboard">תמונת חודש</button>
-        <button class="nav-item" data-screen="transactions">עסקאות</button>
-        <button class="nav-item" data-screen="income">הכנסות</button>
-        <button class="nav-item" data-screen="fixed">הוצאות קבועות</button>
-        <button class="nav-item" data-screen="offsets">קיזוזים</button>
-        <button class="nav-item" data-screen="categories">קטגוריות</button>
-        <button class="nav-item" data-screen="import">ייבוא CSV</button>
-        <button class="nav-item" data-screen="backup">גיבוי</button>
-        <button class="nav-item" data-screen="settings">הגדרות</button>
-      </nav>
-      <div class="sidebar-foot">
-        <div id="saveStatus">נשמר מקומית</div>
-        <div id="cloudStatus">ענן: לא מחובר</div>
-      </div>
-    </aside>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">L</div><div><h1>Ledger</h1><p>v9 Server Cloud</p></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div id="cloudBadge" class="cloudBadge bad">ענן: לא מחובר<br><span id="cloudSmall">שמירה מקומית פעילה</span></div>
+  </aside>
+  <main class="main">
+    <div class="top"><div class="title"><small>LEDGER V9</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
+    <div id="content"></div>
+  </main>
+</div>
+<input id="fileInput" type="file" accept=".csv,.txt,.pdf" multiple class="hidden" />
+<input id="restoreInput" type="file" accept=".json" class="hidden" />
+<script>
+const APP_VERSION='v9';
+const LS='ledger-v9-state'; const CFG='ledger-v9-config';
+const months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+const defaultCategories=['בית','תחזוקת בית','סופר','אוכל','מסעדות','בגדים','ילדים','חינוך','בריאות','רכב','דלק','ביטוח','תקשורת','נופש','בילויים','כלבים','עבודה','חסכונות','משכנתא','קיזוז','מסים','אחר'];
+const catColors=['#2563eb','#0891b2','#059669','#65a30d','#ca8a04','#ea580c','#dc2626','#be185d','#9333ea','#4f46e5','#0f766e','#475569'];
+const members=['משפחה','פיני','מעיין','יובל','ירדן','יואב'];
+const memberColors={משפחה:'#334155',פיני:'#2563eb','מעיין':'#db2777','יובל':'#f59e0b','ירדן':'#10b981','יואב':'#8b5cf6'};
+const defaultIncome=['משכורת פיני','משכורת מעיין','ביטוח לאומי ילדים'];
+const defaultFixed=['משכנתא','חיסכון ילדים - מור','הלוואה קטנוע'];
+const defaultOffsets=['מס הכנסה','ביטוח לאומי','ביטוח לאומי / מגדל','פנסיה מנורה'];
+let state=loadState(); let config=loadConfig(); let supa=null; let cloudSession=false; let saveTimer=null;
+const screens=[['dashboard','תמונת חודש'],['income','הכנסות'],['fixed','הוצאות קבועות'],['offsets','קיזוזים'],['transactions','פירוט עסקאות'],['categories','קטגוריות'],['import','ייבוא קבצים'],['backup','גיבוי ושחזור'],['cloud','גיבוי ענן'],['settings','הגדרות']];
+let screen='dashboard';
+function blank(){return {year:2026,month:6,income:[],fixed:[],offsets:[],transactions:[],categories:[],merchantRules:{},memberRules:{},lastCloudAt:null}}
+function loadState(){try{return ensureDefaults(JSON.parse(localStorage.getItem(LS))||blank())}catch{return ensureDefaults(blank())}}
+function loadConfig(){try{return JSON.parse(localStorage.getItem(CFG))||{}}catch{return {}}}
+function saveConfig(){localStorage.setItem(CFG,JSON.stringify(config))}
+function ensureDefaults(s){s.categories=s.categories||[]; defaultCategories.forEach((n,i)=>{if(!s.categories.find(c=>c.name===n))s.categories.push({id:id(),name:n,color:catColors[i%catColors.length]})}); s.income=s.income||[]; defaultIncome.forEach(n=>{if(!s.income.find(x=>x.name===n))s.income.push({id:id(),name:n,amount:0})}); s.fixed=s.fixed||[]; defaultFixed.forEach(n=>{if(!s.fixed.find(x=>x.name===n))s.fixed.push({id:id(),name:n,amount:0,category:n.includes('משכנתא')?'משכנתא':'חסכונות'})}); s.offsets=s.offsets||[]; defaultOffsets.forEach(n=>{if(!s.offsets.find(x=>x.name===n))s.offsets.push({id:id(),name:n,amount:0,category:'קיזוז'})}); s.transactions=s.transactions||[]; s.merchantRules=s.merchantRules||{}; s.memberRules=s.memberRules||{}; return s}
+function persist(){state=ensureDefaults(state); localStorage.setItem(LS,JSON.stringify(state)); scheduleCloudSave(); render()}
+function id(){return Math.random().toString(36).slice(2)+Date.now().toString(36)}
+function money(n){return Number(n||0).toLocaleString('he-IL',{style:'currency',currency:'ILS',maximumFractionDigits:0})}
+function byMonth(arr){return arr.filter(x=>(x.year??state.year)==state.year&&(x.month??state.month)==state.month)}
+function totals(){const inc=state.income.reduce((a,b)=>a+num(b.amount),0); const fixed=state.fixed.reduce((a,b)=>a+num(b.amount),0); const off=state.offsets.reduce((a,b)=>a+num(b.amount),0); const tx=byMonth(state.transactions); const card=tx.reduce((a,b)=>a+Math.max(0,num(b.amount)),0); const expenses=fixed+card; return {inc,fixed,off,card,expenses,balance:inc-expenses+off,tx,review:tx.filter(t=>t.review).length}}
+function num(v){if(typeof v==='number')return v; return Number(String(v||'').replace(/,/g,'').replace(/[₪\s]/g,''))||0}
+function cat(name){return state.categories.find(c=>c.name===name)||state.categories.find(c=>c.name==='אחר')}
+function catOptions(sel){return state.categories.map(c=>`<option ${c.name===sel?'selected':''}>${esc(c.name)}</option>`).join('')}
+function memOptions(sel){return members.map(m=>`<option ${m===sel?'selected':''}>${m}</option>`).join('')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function nav(){document.getElementById('nav').innerHTML=screens.map(([k,v])=>`<button class="${screen===k?'active':''}" onclick="go('${k}')">${v}</button>`).join('')}
+function go(s){screen=s; render()}
+function moveMonth(d){state.month+=d;if(state.month<0){state.month=11;state.year--}if(state.month>11){state.month=0;state.year++}persist()}
+function render(){nav(); document.getElementById('monthLabel').textContent=months[state.month]+' '+state.year; const map={dashboard:['תמונת חודש','האם חסכת, לאן הלך הכסף ומה דורש טיפול'],income:['הכנסות','משכורות והכנסות נוספות'],fixed:['הוצאות קבועות','הוצאות שאינן אשראי'],offsets:['קיזוזים','סכומים שאינם צריכים להיחשב כהוצאה'],transactions:['פירוט עסקאות','שיוך לבני משפחה, קטגוריות והערות'],categories:['קטגוריות','ניהול צבעים וכללי סיווג'],import:['ייבוא קבצים','CSV ו-PDF טקסטואלי'],backup:['גיבוי ושחזור','JSON מקומי'],cloud:['גיבוי ענן','שמירה דרך Netlify Function ל-Supabase'],settings:['הגדרות','הגדרות בסיסיות']}; document.getElementById('pageTitle').textContent=map[screen][0];document.getElementById('pageSub').textContent=map[screen][1]; updateCloudBadge(); document.getElementById('content').innerHTML=views[screen](); bindAfterRender()}
+function updateCloudBadge(){const b=document.getElementById('cloudBadge'),s=document.getElementById('cloudSmall'); if(cloudSession){b.className='cloudBadge good'; b.firstChild.nodeValue='ענן: מחובר'; s.textContent='שמירה אוטומטית פעילה'} else {b.className='cloudBadge bad'; b.firstChild.nodeValue='ענן: לא מחובר'; s.textContent='שמירה מקומית פעילה'}}
+const views={
+ dashboard(){const t=totals(); const top=Object.entries(group(t.tx,'category')).sort((a,b)=>b[1]-a[1]).slice(0,8); const mem=Object.entries(group(t.tx,'member')).sort((a,b)=>b[1]-a[1]); const max=Math.max(1,...top.map(x=>x[1])); return `<div class="section"><div class="cards"><div class="card"><h3>הכנסות</h3><div class="big">${money(t.inc)}</div></div><div class="card"><h3>הוצאות</h3><div class="big">${money(t.expenses)}</div><small>קבועות ${money(t.fixed)} · אשראי ${money(t.card)}</small></div><div class="card"><h3>עודף / גירעון</h3><div class="big ${t.balance>=0?'green':'red'}">${money(t.balance)}</div><small>אחרי קיזוזים ${money(t.off)}</small></div><div class="card"><h3>דורש בדיקה</h3><div class="big">${t.review}</div><small>עסקאות: ${t.tx.length}</small></div></div><div class="grid2"><div class="panel"><h3>לאן הלך הכסף</h3><div class="summaryList">${top.length?top.map(([k,v])=>`<div><b>${esc(k||'אחר')}</b> <span>${money(v)}</span><div class="bar"><span style="width:${Math.round(v/max*100)}%"></span></div></div>`).join(''):'<div class="hint">אין עסקאות עדיין.</div>'}</div></div><div class="panel"><h3>בני משפחה</h3><div class="summaryList">${mem.length?mem.map(([k,v])=>`<div><span class="memdot" style="background:${memberColors[k]||'#64748b'}"></span> <b>${esc(k)}</b> ${money(v)}</div>`).join(''):'<div class="hint">אין נתונים עדיין.</div>'}</div></div></div></div>`},
+ income(){return listMoney('income','הכנסה','שם הכנסה')}, fixed(){return listMoney('fixed','הוצאה קבועה','שם הוצאה')}, offsets(){return listMoney('offsets','קיזוז','שם קיזוז')},
+ transactions(){const tx=byMonth(state.transactions).sort((a,b)=>String(a.card||'').localeCompare(String(b.card||''),'he')||String(a.date||'').localeCompare(String(b.date||''))||String(a.merchant||'').localeCompare(String(b.merchant||''),'he')); return `<div class="panel"><div class="toolbar"><button class="btn primary" onclick="addTx()">הוסף עסקה</button><input id="q" placeholder="חיפוש לפי ספק, כרטיס, הערה..." oninput="filterTx()" style="max-width:360px"><select id="fcat" onchange="filterTx()"><option value="">כל הקטגוריות</option>${catOptions('')}</select><select id="fmem" onchange="filterTx()"><option value="">כל בני המשפחה</option>${memOptions('')}</select></div><div class="tablewrap"><div class="row wide head txrow"><div>תאריך</div><div>ספק</div><div>סכום</div><div>כרטיס</div><div>קטגוריה</div><div>בן משפחה</div><div></div></div><div id="txbody">${tx.map(txRow).join('')}</div></div></div>`},
+ categories(){return `<div class="panel"><div class="input2"><input id="newcat" placeholder="קטגוריה חדשה"><input id="newcatcolor" type="color" value="#2563eb"><button class="btn primary" onclick="addCat()">הוסף</button></div>${state.categories.map(c=>`<div class="row"><input value="${esc(c.name)}" onchange="updCat('${c.id}','name',this.value)"><input type="color" value="${c.color}" onchange="updCat('${c.id}','color',this.value)"><span class="colorTag" style="background:${c.color}">${esc(c.name)}</span><button class="btn red" onclick="delCat('${c.id}')">מחק</button></div>`).join('')}</div>`},
+ import(){return `<div class="panel"><h3>ייבוא CSV / PDF</h3><div class="drop"><p>בחר קבצים. CSV מומלץ. PDF יעבוד רק אם הוא כולל טקסט קריא.</p><button class="btn primary" onclick="fileInput.click()">בחר קבצים</button></div><div class="warn" style="margin-top:14px">המערכת מסננת כפילויות לפי כרטיס + תאריך + ספק + סכום. PDF מסומן לבדיקה אם הפענוח לא ודאי.</div></div>`},
+ backup(){return `<div class="grid2"><div class="panel"><h3>גיבוי JSON</h3><button class="btn primary" onclick="downloadBackup()">הורד גיבוי JSON</button></div><div class="panel"><h3>שחזור JSON</h3><button class="btn amber" onclick="restoreInput.click()">שחזר מקובץ</button></div></div>`},
+ cloud(){return `<div class="panel cloud"><h3>גיבוי ענן - שרת Netlify</h3><div class="hint">גרסה זו לא שולחת את הדפדפן ישירות ל-Supabase. האתר קורא ל-Netlify Function, והשרת שומר את הנתונים ב-Supabase. אין מיילים, אין Redirect, ואין Anon Key בתוך האתר.</div><div class="row" style="grid-template-columns:1fr 1fr auto auto;margin-top:14px"><input id="cEmail" placeholder="Email" value="${esc(config.email||'')}"><input id="cPass" placeholder="סיסמת Ledger" value="${esc(config.password||'')}" type="password"><button class="btn primary" onclick="saveCloudConfig()">שמור</button><button class="btn" onclick="testCloud()">בדיקת שרת</button></div><div class="toolbar"><button class="btn primary" onclick="signIn()">טען מהענן / כניסה</button><button class="btn primary" onclick="saveCloudNow()">שמור לענן עכשיו</button><button class="btn" onclick="cloudSnapshot()">צור Snapshot</button><button class="btn red" onclick="signOut()">התנתק</button></div><div class="warn">סטטוס: ${cloudSession?'מחובר':'לא מחובר'}${state.lastCloudAt?' · נשמר לאחרונה: '+state.lastCloudAt:''}</div><pre class="log" id="log"></pre></div>`},
+ settings(){return `<div class="panel"><h3>הגדרות</h3><div class="hint">הכתובת הקבועה המומלצת: https://pini-ledger.netlify.app. עדכוני גרסה צריכים לעלות לאותה כתובת.</div></div>`}
+};
+function listMoney(type,label,ph){return `<div class="panel"><div class="input2"><input id="n_${type}" placeholder="${ph}"><input id="a_${type}" type="number" placeholder="סכום"><button class="btn primary" onclick="addMoney('${type}')">הוסף ${label}</button></div>${state[type].map(x=>`<div class="row"><input value="${esc(x.name)}" onchange="updMoney('${type}','${x.id}','name',this.value)"><input type="number" value="${esc(x.amount)}" onchange="updMoney('${type}','${x.id}','amount',this.value)"><select onchange="updMoney('${type}','${x.id}','category',this.value)">${catOptions(x.category|| (type==='offsets'?'קיזוז':'אחר'))}</select><button class="btn red" onclick="delMoney('${type}','${x.id}')">מחק</button></div>`).join('')}</div>`}
+function group(arr,key){return arr.reduce((a,x)=>{const k=x[key]||'אחר'; a[k]=(a[k]||0)+num(x.amount); return a},{})}
+function bindAfterRender(){fileInput.onchange=importFiles; restoreInput.onchange=restoreBackup}
+function addMoney(t){const n=document.getElementById('n_'+t).value.trim(), a=num(document.getElementById('a_'+t).value); if(!n)return; state[t].push({id:id(),name:n,amount:a,category:t==='offsets'?'קיזוז':'אחר'}); persist()}
+function updMoney(t,i,k,v){const x=state[t].find(y=>y.id===i); if(x){x[k]=k==='amount'?num(v):v; persist()}}
+function delMoney(t,i){state[t]=state[t].filter(x=>x.id!==i); persist()}
+function txRow(t){const c=cat(t.category); return `<div class="row wide txrow" data-search="${esc(Object.values(t).join(' ').toLowerCase())}" data-cat="${esc(t.category)}" data-mem="${esc(t.member)}"><input type="date" value="${esc(t.date)}" onchange="updTx('${t.id}','date',this.value)"><input value="${esc(t.merchant)}" onchange="updTx('${t.id}','merchant',this.value)"><input type="number" value="${esc(t.amount)}" onchange="updTx('${t.id}','amount',this.value)"><input value="${esc(t.card)}" onchange="updTx('${t.id}','card',this.value)"><select style="border-right:8px solid ${c.color}" onchange="updTx('${t.id}','category',this.value,true)">${catOptions(t.category)}</select><select style="border-right:8px solid ${memberColors[t.member]||'#64748b'}" onchange="updTx('${t.id}','member',this.value,false,true)">${memOptions(t.member)}</select><button class="btn red" onclick="delTx('${t.id}')">מחק</button><input style="grid-column:1/7" value="${esc(t.note)}" placeholder="הערה" onchange="updTx('${t.id}','note',this.value)"><label><input type="checkbox" ${t.review?'checked':''} onchange="updTx('${t.id}','review',this.checked)"> לבדיקה</label></div>`}
+function addTx(){state.transactions.push({id:id(),year:state.year,month:state.month,date:new Date().toISOString().slice(0,10),merchant:'',amount:0,card:'',category:'אחר',member:'משפחה',note:'',review:false}); persist(); go('transactions')}
+function updTx(i,k,v,learnCat=false,learnMem=false){const t=state.transactions.find(x=>x.id===i); if(!t)return; t[k]=k==='amount'?num(v):v; if(learnCat&&t.merchant)state.merchantRules[clean(t.merchant)]=v; if(learnMem&&t.merchant)state.memberRules[clean(t.merchant)]=v; persist()}
+function delTx(i){state.transactions=state.transactions.filter(x=>x.id!==i); persist()}
+function filterTx(){const q=(document.getElementById('q')?.value||'').toLowerCase(), fc=document.getElementById('fcat')?.value||'', fm=document.getElementById('fmem')?.value||''; document.querySelectorAll('#txbody .txrow').forEach(r=>{const ok=(!q||r.dataset.search.includes(q))&&(!fc||r.dataset.cat===fc)&&(!fm||r.dataset.mem===fm); r.style.display=ok?'grid':'none'})}
+function addCat(){const n=document.getElementById('newcat').value.trim(); if(!n)return; if(!state.categories.find(c=>c.name===n))state.categories.push({id:id(),name:n,color:document.getElementById('newcatcolor').value}); persist()}
+function updCat(i,k,v){const c=state.categories.find(x=>x.id===i); if(c){const old=c.name;c[k]=v;if(k==='name'){state.transactions.forEach(t=>{if(t.category===old)t.category=v})} persist()}}
+function delCat(i){const c=state.categories.find(x=>x.id===i); if(!c)return; state.categories=state.categories.filter(x=>x.id!==i); state.transactions.forEach(t=>{if(t.category===c.name)t.category='אחר'}); persist()}
+function clean(s){return String(s||'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+function guessCat(m){const x=clean(m); if(state.merchantRules[x])return state.merchantRules[x]; if(/שופרסל|רמי לוי|ויקטורי|יוחננוף|קרפור/.test(x))return 'סופר'; if(/פז|דלק|סונול|דור אלון/.test(x))return 'דלק'; if(/ביטוח|הראל|מגדל|הפניקס/.test(x))return 'ביטוח'; if(/מסעד|קפה|פיצה|המבורגר|סושי|גלידה/.test(x))return 'מסעדות'; if(/סלקום|פרטנר|בזק|הוט|חשמל|מים|ארנונה/.test(x))return 'תקשורת'; if(/shein|zara|h&m|קסטרו|פוקס/.test(x))return 'בגדים'; return 'אחר'}
+function guessMem(m){const x=clean(m); return state.memberRules[x]||'משפחה'}
+function dupKey(t){return [t.card,t.date,clean(t.merchant),num(t.amount).toFixed(2)].join('|')}
+async function importFiles(e){const files=[...e.target.files]; for(const f of files){const text=await f.text().catch(()=> ''); parseText(text,f.name)} e.target.value=''; persist(); go('transactions')}
+function parseText(text,file){let added=0; const existing=new Set(state.transactions.map(dupKey)); const rows=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean); for(const line of rows){const parts=line.includes(',')?line.split(','):line.split(/\s{2,}|\t/); let date='', amount='', merchant='', card=''; for(const p of parts){const s=p.trim(); if(!date&&/(\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4})/.test(s))date=s.match(/\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}/)[0]; if(!amount&&/^-?\d+[,.]?\d*$/.test(s.replace(/[₪,]/g,'')))amount=s; if(!card&&/\b\d{4}\b/.test(s))card=s.match(/\b\d{4}\b/)[0]}
+      merchant=parts.find(p=>/[\p{L}]{2,}/u.test(p)&&!/(סהכ|מסגרת|לתאריך|עמוד|כרטיס|עסקה)/.test(p))||''; if(!date||!amount||!merchant)continue; const iso=toISO(date); const tx={id:id(),year:state.year,month:state.month,date:iso,merchant:merchant.trim(),amount:Math.abs(num(amount)),card,category:guessCat(merchant),member:guessMem(merchant),note:file.toLowerCase().endsWith('.pdf')?'':'',review:file.toLowerCase().endsWith('.pdf')}; const k=dupKey(tx); if(existing.has(k))continue; existing.add(k); state.transactions.push(tx); added++ }
+    alert(`יובאו ${added} עסקאות מתוך ${file}`)}
+function toISO(d){const p=d.split(/[\/.-]/).map(Number); if(p[2]<100)p[2]+=2000; return `${p[2]}-${String(p[1]).padStart(2,'0')}-${String(p[0]).padStart(2,'0')}`}
+function downloadBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='ledger-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click()}
+async function restoreBackup(e){const f=e.target.files[0]; if(!f)return; state=ensureDefaults(JSON.parse(await f.text())); persist(); e.target.value=''}
 
-    <main class="main">
-      <header class="topbar">
-        <div>
-          <h2 id="screenTitle">תמונת חודש</h2>
-          <p id="screenSubtitle">האם חסכת, לאן הלך הכסף, ומה דורש טיפול</p>
-        </div>
-        <div class="month-control">
-          <button id="prevMonth" title="חודש קודם">‹</button>
-          <strong id="monthLabel"></strong>
-          <button id="nextMonth" title="חודש הבא">›</button>
-        </div>
-      </header>
-      <section id="content" class="content"></section>
-    </main>
-  </div>
-
-  <template id="toastTpl"><div class="toast"></div></template>
-  <div id="toastHost" class="toast-host"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/config.js"></script>
-  <script src="js/app.js"></script>
+function saveCloudConfig(){
+  config.email=document.getElementById('cEmail').value.trim().toLowerCase();
+  config.password=document.getElementById('cPass').value;
+  saveConfig(); log('Settings saved'); render();
+}
+function initSupabase(){ /* v9: no browser Supabase client. Server function handles cloud. */ }
+function log(s){const el=document.getElementById('log'); if(el)el.textContent += new Date().toLocaleTimeString()+' '+s+'\n'}
+function requireCloudFields(){
+  if(!config.email) throw new Error('חסר אימייל');
+  if(!config.password || config.password.length<6) throw new Error('סיסמת Ledger חייבת להיות לפחות 6 תווים');
+}
+async function callServer(action, payload={}){
+  requireCloudFields();
+  const res=await fetch('/.netlify/functions/ledger',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,email:config.email,password:config.password,...payload})});
+  const text=await res.text();
+  let json; try{json=JSON.parse(text)}catch{json={ok:false,error:text||('HTTP '+res.status)}}
+  if(!res.ok || !json.ok){throw new Error(json.error || json.message || ('HTTP '+res.status))}
+  return json;
+}
+async function testCloud(){
+  try{saveCloudConfig(); const r=await callServer('test'); cloudSession=true; log('SERVER TEST OK '+JSON.stringify(r)); alert('בדיקת שרת תקינה. אפשר לטעון/לשמור לענן.');}
+  catch(e){cloudSession=false; log('TEST ERROR '+(e.message||e)); alert('שגיאת בדיקה: '+(e.message||e));}
+  render();
+}
+async function signUp(){return testCloud()}
+async function signIn(){
+  try{saveCloudConfig(); const r=await callServer('load'); cloudSession=true; log('LOGIN/LOAD OK'); if(r.data&&Object.keys(r.data).length){state=ensureDefaults(r.data); localStorage.setItem(LS,JSON.stringify(state));} render(); alert('התחברת ונטען מהענן');}
+  catch(e){cloudSession=false; log('LOGIN ERROR '+(e.message||e)); alert('שגיאת כניסה: '+(e.message||e)); render();}
+}
+async function signOut(){cloudSession=false; render()}
+async function loadCloud(){return signIn()}
+async function saveCloudNow(){
+  try{const payload={...state,lastCloudAt:new Date().toISOString()}; const r=await callServer('save',{data:payload}); cloudSession=true; state.lastCloudAt=new Date().toLocaleString('he-IL'); localStorage.setItem(LS,JSON.stringify(state)); log('Saved cloud'); render(); alert('נשמר בענן');}
+  catch(e){log('SAVE ERROR '+(e.message||e)); alert('שגיאת שמירה: '+(e.message||e));}
+}
+async function cloudSnapshot(){
+  try{const r=await callServer('snapshot',{data:state,reason:'manual'}); cloudSession=true; log('Snapshot created'); alert('Snapshot נוצר בענן');}
+  catch(e){log('SNAP ERROR '+(e.message||e)); alert('שגיאת Snapshot: '+(e.message||e));}
+}
+function scheduleCloudSave(){localStorage.setItem(LS,JSON.stringify(state)); if(!cloudSession)return; clearTimeout(saveTimer); saveTimer=setTimeout(()=>saveCloudNow().catch(()=>{}),1500)}
+window.addEventListener('load',async()=>{initSupabase(); render()});
+render();
+</script>
 </body>
 </html>
