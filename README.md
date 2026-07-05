@@ -1,4 +1,4 @@
-Ledger v9 Server Cloud
-
-This version uses Netlify Functions as a server-side bridge to Supabase.
-Do not put the service role key in the browser. Put it only in Netlify environment variables.
+Ledger v14 Vercel Free
+- Free-hosting version for Vercel Hobby.
+- Uses /api/ledger serverless function instead of Netlify Functions.
+- Same Supabase tables and data.
