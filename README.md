@@ -1,4 +1,11 @@
-Ledger v14 Vercel Free
-- Free-hosting version for Vercel Hobby.
-- Uses /api/ledger serverless function instead of Netlify Functions.
-- Same Supabase tables and data.
+# Ledger v15 Credit Import
+
+גרסת תיקון ממוקדת ללשונית פירוט עסקאות וייבוא כרטיסי אשראי בלבד.
+
+- תצוגה לפי כרטיס אשראי
+- מיון כרונולוגי בכל כרטיס
+- טבלה קומפקטית
+- בחירת בני משפחה בכפתורים
+- סימון חריגות
+- ייבוא PDF משופר לישראכרט, MAX וכאל
+- עובד עם Vercel Function ב-/api/ledger
