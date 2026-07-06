@@ -1,33 +1,13 @@
-# Ledger v17 - Stable Credit Import
+# Ledger v18
 
-This version keeps the existing Ledger data model and cloud backup, and replaces credit-card PDF import with a server-side Vercel parser.
+גרסה זו מתקנת את לשונית ייבוא ופירוט כרטיסי האשראי, בלי לשנות את מבנה הנתונים הקיים.
 
-## What changed
+עיקרי השינוי:
+- פענוח PDF משופר לישראכרט, MAX וכאל.
+- זיהוי כרטיסי כאל 0591, 1570, 3558, 4880.
+- חישוב חודשי לפי סך החיוב של כל כרטיס כפי שנמצא במסמך.
+- אפשרות לערוך ידנית את סך החיוב בכותרת כל כרטיס.
+- שמירה לענן ידנית בלבד, ללא שמירה אוטומטית אחרי כל שינוי.
+- תמונת חודש מפורטת יותר לפי בני משפחה, קטגוריות וחריגות.
 
-- PDF files are parsed through `/api/parse-card` using Vercel Functions and `pdf-parse`.
-- Credit-card imports are grouped by card in the UI and sorted chronologically inside each card.
-- Merchant names are extracted from PDF coordinates instead of broad text guesses.
-- Installments are detected where the PDF contains `תשלום X מתוך Y`.
-- Family member selection now works from the transaction table.
-- Imports use duplicate detection by card/date/merchant/amount.
-- Existing income, fixed expenses, offsets, categories, rules and cloud state are preserved.
-
-## Deploy
-
-Upload all files in this repository to the existing GitHub repository connected to Vercel. Vercel will install dependencies from `package.json` and deploy automatically.
-
-## Environment variables
-
-The existing server backup continues to use:
-
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `LEDGER_EMAIL`
-- `LEDGER_PASSWORD`
-
-
-## v17
-
-- Removed misleading installment placeholder text.
-- Added cleanup for suspicious repeated installment values imported by older builds.
-- Server-side PDF parser remains unchanged except for safer installment persistence.
+פריסה: GitHub → Vercel.
