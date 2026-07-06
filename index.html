@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ledger v15</title>
+  <title>Ledger v16</title>
     <style>
     :root{--bg:#f4f7fb;--panel:#fff;--ink:#0f172a;--muted:#667085;--line:#dbe3ef;--blue:#2563eb;--green:#059669;--red:#dc2626;--amber:#b45309;--nav:#0f172a}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,'Noto Sans Hebrew','Segoe UI',sans-serif;color:var(--ink);font-size:14px}
@@ -14,17 +14,22 @@
     .txrow{min-width:1320px!important}.txrow:not(.head){border-bottom:1px solid #e6edf6!important;padding:4px 0!important}.txrow input,.txrow select{height:34px;padding:6px 8px;font-size:13px}.merchantCellInput{font-weight:800}.membersBox{display:flex;gap:4px;flex-wrap:wrap}.quickMember{border:1px solid #d8e1ef;background:#fff;border-radius:999px;padding:4px 7px;font-size:12px;font-weight:800;cursor:pointer}.quickMember.on{color:#fff}.smallMeta{font-size:11px;color:#64748b;line-height:1.2}.catSelect{font-weight:900}.amountInput{text-align:left;font-weight:900}.installmentInput{font-size:12px}.cardHeader{min-width:1320px;background:#e0f2fe;color:#075985;font-weight:900;border:1px solid #bae6fd;border-radius:12px;margin:10px 0 4px;padding:8px 12px}.toolbar input,.toolbar select{height:38px;border:1px solid var(--line);border-radius:9px;padding:6px 8px;background:white}.btn.compact{padding:7px 10px;font-size:13px}
     .creditTable{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px}.creditTable th{color:#475569;text-align:right;font-size:12px;padding:4px 8px}.creditTable td{background:#fff;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;padding:6px 8px;vertical-align:middle}.creditTable td:first-child{border-right:1px solid #e2e8f0;border-radius:0 10px 10px 0}.creditTable td:last-child{border-left:1px solid #e2e8f0;border-radius:10px 0 0 10px}.creditTable input,.creditTable select{height:30px;border:1px solid #dbe3ef;border-radius:8px;padding:4px 6px;background:#fff;font-size:13px}.merchantInput{min-width:250px;font-weight:800}.amountMini{width:90px;text-align:left;font-weight:900}.cardMini{width:70px;text-align:center;font-weight:900;background:#eef2ff!important;color:#3730a3;border-radius:999px!important}.installMini{width:110px}.exceptionMini{display:flex;gap:5px;align-items:center;white-space:nowrap}.catBadgeSelect{font-weight:900;border-right-width:8px!important}.cardSection{background:#e0f2fe;color:#075985;border:1px solid #bae6fd;border-radius:12px;padding:9px 12px;margin:14px 0 6px;font-weight:900;display:flex;justify-content:space-between}.memberMini{display:flex;gap:4px;flex-wrap:wrap;min-width:235px}.memberBtn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:3px 7px;font-size:12px;font-weight:800;cursor:pointer}.memberBtn.on{color:#fff}.reviewRow td{background:#fff7ed}.catDotLabel{display:inline-flex;align-items:center;gap:5px}.importStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.statBox{border:1px solid #dbe3ef;background:#f8fafc;border-radius:12px;padding:10px;font-weight:900}.muted{color:#64748b;font-size:12px}
 
+      /* v16 Stable Import CSS */
+
+    .cardSection{background:#e0f2fe;color:#075985;border:1px solid #bae6fd;border-radius:12px;padding:8px 12px;margin:14px 0 6px;font-weight:900;display:flex;justify-content:space-between;position:sticky;top:0;z-index:2}
+    .creditTable{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:12px}.creditTable th{color:#475569;text-align:right;font-size:11px;padding:3px 6px}.creditTable td{background:#fff;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;padding:4px 6px;vertical-align:middle}.creditTable td:first-child{border-right:1px solid #e2e8f0;border-radius:0 8px 8px 0}.creditTable td:last-child{border-left:1px solid #e2e8f0;border-radius:8px 0 0 8px}.creditTable input,.creditTable select{height:28px;border:1px solid #dbe3ef;border-radius:7px;padding:3px 6px;background:#fff;font-size:12px}.merchantInput{min-width:240px;font-weight:800}.amountMini{width:86px;text-align:left;font-weight:900}.installMini{width:96px}.memberMini{display:flex;gap:3px;flex-wrap:wrap;min-width:220px}.memberBtn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:3px 6px;font-size:11px;font-weight:800;cursor:pointer}.memberBtn.on{color:#fff}.reviewRow td{background:#fff7ed}.exceptionMini{display:flex;gap:5px;align-items:center;white-space:nowrap}.catBadgeSelect{font-weight:900;border-right-width:7px!important}.muted{color:#64748b;font-size:11px}.importStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.statBox{border:1px solid #dbe3ef;background:#f8fafc;border-radius:12px;padding:9px;font-weight:900}
+
   </style>
 </head>
 <body>
 <div class="app">
   <aside class="side">
-    <div class="brand"><div class="logo">L</div><div><h1>Ledger</h1><p>v15 Credit Import</p></div></div>
+    <div class="brand"><div class="logo">L</div><div><h1>Ledger</h1><p>v16 Stable Import</p></div></div>
     <nav class="nav" id="nav"></nav>
     <div id="cloudBadge" class="cloudBadge bad">ענן: לא מחובר<br><span id="cloudSmall">שמירה מקומית פעילה</span></div>
   </aside>
   <main class="main">
-    <div class="top"><div class="title"><small>LEDGER V15</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
+    <div class="top"><div class="title"><small>LEDGER V16</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
     <div id="content"></div>
   </main>
 </div>
@@ -33,7 +38,7 @@
 <datalist id="membersList"><option value="משפחה"><option value="פיני"><option value="מעיין"><option value="יובל"><option value="ירדן"><option value="יואב"><option value="יואב, ירדן"><option value="יובל:50, ירדן:50"></datalist>
 <script>
 
-const APP_VERSION='v15';
+const APP_VERSION='v16';
 const LS='ledger-v9-state'; const CFG='ledger-v9-config';
 const months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 const defaultCategories=['בית','תחזוקת בית','סופר','אוכל','מסעדות','בגדים','ילדים','חינוך','בריאות','רכב','דלק','ביטוח','תקשורת','נופש','בילויים','כלבים','עבודה','חסכונות','משכנתא','קיזוז','מסים','העברות','מתנות','יופי','פארמה','מחשבים','אחר'];
@@ -90,9 +95,30 @@ function addMoney(t){const n=document.getElementById('n_'+t).value.trim(), a=num
 function updMoney(t,i,k,v){const x=state[t].find(y=>y.id===i); if(x){x[k]=k==='amount'?num(v):v; persist()}}
 function delMoney(t,i){state[t]=state[t].filter(x=>x.id!==i); persist()}
 function sortTx(a,b){return String(a.card||'').localeCompare(String(b.card||''),'he',{numeric:true})||String(a.date||'').localeCompare(String(b.date||''))||String(a.merchant||'').localeCompare(String(b.merchant||''),'he')||num(a.amount)-num(b.amount)}
-function clearImportedThisMonth(){if(!confirm('למחוק את כל העסקאות שיובאו מקבצי PDF/CSV בחודש הנוכחי? הכנסות, הוצאות קבועות וקיזוזים לא יימחקו.'))return; const before=state.transactions.length; state.transactions=state.transactions.filter(t=>!((t.year??state.year)==state.year&&(t.month??state.month)==state.month&&(t.imported||/^pdf\.|\.pdf|\.csv|\.txt/i.test(String(t.note||''))))); alert(`נמחקו ${before-state.transactions.length} עסקאות מיובאות`); persist()}
+function clearImportedThisMonth(){if(!confirm('למחוק את כל העסקאות שיובאו מקבצי PDF/CSV בחודש הנוכחי? הכנסות, הוצאות קבועות וקיזוזים לא יימחקו.'))return; const before=state.transactions.length; state.transactions=state.transactions.filter(t=>!((t.year??state.year)==state.year&&(t.month??state.month)==state.month&&(t.imported||t.sourceFile||/^pdf\.|\.pdf|\.csv|\.txt/i.test(String(t.note||''))))); alert(`נמחקו ${before-state.transactions.length} עסקאות מיובאות`); persist()}
 function memberButtons(t){const active=(t.members&&t.members.length?t.members:parseMembers(t.member||'משפחה')).map(x=>x.member); return `<div class="memberMini">${members.map(m=>`<button type="button" class="memberBtn ${active.includes(m)?'on':''}" style="${active.includes(m)?'background:'+(memberColors[m]||'#64748b')+';border-color:'+(memberColors[m]||'#64748b'):''}" onclick="toggleMember('${t.id}','${m}')">${m}</button>`).join('')}</div><div class="muted">${esc(memberText(t))}</div>`}
-function txRow(t){const c=cat(t.category); const split=memberText(t); const exc=t.exceptional?'exceptional':'regular'; return `<tr class="${t.review||t.category==='אחר'?'reviewRow':''}" data-search="${esc(Object.values(t).join(' ').toLowerCase())}" data-cat="${esc(t.category)}" data-mem="${esc(split)}" data-exc="${exc}"><td><input type="date" value="${esc(t.date)}" onchange="updTx('${t.id}','date',this.value)"><div class="cardMini">${esc(t.card||'')}</div></td><td><input class="merchantInput" value="${esc(t.merchant)}" onchange="updTx('${t.id}','merchant',this.value,true,true,true)">${t.sourceCategory?`<div class="muted">מקור: ${esc(t.sourceCategory)}</div>`:''}${t.note?`<div class="muted">${esc(t.note)}</div>`:''}</td><td><input class="amountMini" type="number" step="0.01" value="${esc(t.amount)}" onchange="updTx('${t.id}','amount',this.value)"></td><td><input class="installMini" value="${esc(t.installment||'')}" placeholder="3 מתוך 12" onchange="updTx('${t.id}','installment',this.value)"></td><td><select class="catBadgeSelect" style="border-right-color:${c.color};color:${c.color}" onchange="updTx('${t.id}','category',this.value,true)">${catOptions(t.category)}</select></td><td>${memberButtons(t)}</td><td><div class="exceptionMini"><label><input type="checkbox" ${t.exceptional?'checked':''} onchange="updTx('${t.id}','exceptional',this.checked,false,false,true)"> חריגה</label><select onchange="updTx('${t.id}','exceptionType',this.value,false,false,true)" ${t.exceptional?'':'disabled'}>${exceptionTypeOptions(t.exceptionType||'')}</select></div></td><td><button class="btn red compact" onclick="delTx('${t.id}')">מחק</button></td></tr>`}
+
+function toggleMember(txId, member){
+  const t=state.transactions.find(x=>x.id===txId);
+  if(!t)return;
+  let current=(t.members&&t.members.length?t.members:parseMembers(t.member||'משפחה')).map(x=>x.member);
+  if(member==='משפחה'){
+    current=['משפחה'];
+  } else {
+    current=current.filter(x=>x!=='משפחה');
+    if(current.includes(member)) current=current.filter(x=>x!==member); else current.push(member);
+    if(!current.length) current=['משפחה'];
+  }
+  const pct=Math.round((100/current.length)*10)/10;
+  t.members=current.map(m=>({member:m,percent:pct}));
+  // fix rounding so total is exactly 100
+  const sum=t.members.reduce((a,b)=>a+Number(b.percent||0),0);
+  if(t.members.length && sum!==100)t.members[t.members.length-1].percent=Math.round((Number(t.members[t.members.length-1].percent||0)+(100-sum))*10)/10;
+  t.member=memberText(t);
+  if(t.merchant)learnMerchant(t);
+  persist();
+}
+function txRow(t){const c=cat(t.category); const split=memberText(t); const exc=t.exceptional?'exceptional':'regular'; return `<tr class="${t.review||t.category==='אחר'?'reviewRow':''}" data-search="${esc(Object.values(t).join(' ').toLowerCase())}" data-cat="${esc(t.category)}" data-mem="${esc(split)}" data-exc="${exc}"><td><input type="date" value="${esc(t.date)}" onchange="updTx('${t.id}','date',this.value)"><div class="cardMini">${esc(t.card||'')}</div></td><td><input class="merchantInput" value="${esc(t.merchant)}" onchange="updTx('${t.id}','merchant',this.value,true,true,true)">${t.sourceCategory?`<div class="muted">מקור: ${esc(t.sourceCategory)}</div>`:''}${t.sourceIssuer?`<div class="muted">${esc(t.sourceIssuer)}</div>`:''}${t.note?`<div class="muted">${esc(t.note)}</div>`:''}</td><td><input class="amountMini" type="number" step="0.01" value="${esc(t.amount)}" onchange="updTx('${t.id}','amount',this.value)"></td><td><input class="installMini" value="${esc(t.installment||'')}" placeholder="3 מתוך 12" onchange="updTx('${t.id}','installment',this.value)"></td><td><select class="catBadgeSelect" style="border-right-color:${c.color};color:${c.color}" onchange="updTx('${t.id}','category',this.value,true)">${catOptions(t.category)}</select></td><td>${memberButtons(t)}</td><td><div class="exceptionMini"><label><input type="checkbox" ${t.exceptional?'checked':''} onchange="updTx('${t.id}','exceptional',this.checked,false,false,true)"> חריגה</label><select onchange="updTx('${t.id}','exceptionType',this.value,false,false,true)" ${t.exceptional?'':'disabled'}>${exceptionTypeOptions(t.exceptionType||'')}</select></div></td><td><button class="btn red compact" onclick="delTx('${t.id}')">מחק</button></td></tr>`}
 function addTx(){state.transactions.push({id:id(),year:state.year,month:state.month,date:new Date().toISOString().slice(0,10),merchant:'',amount:0,card:'',category:'אחר',member:'משפחה',members:parseMembers('משפחה'),note:'',review:false,exceptional:false,exceptionType:'',installment:''}); persist(); go('transactions')}
 function updTx(i,k,v,learnCat=false,learnMem=false,learnExc=false){const t=state.transactions.find(x=>x.id===i); if(!t)return; if(k==='amount')t[k]=num(v); else if(k==='membersText'){t.members=parseMembers(v); t.member=memberText(t)} else if(k==='exceptional'){t.exceptional=!!v; if(!t.exceptional)t.exceptionType=''} else t[k]=v; if(t.exceptional && !t.exceptionType)t.exceptionType='אחר'; if((learnCat||learnMem||learnExc)&&t.merchant)learnMerchant(t); persist()}
 function delTx(i){state.transactions=state.transactions.filter(x=>x.id!==i); persist()}
@@ -127,7 +153,88 @@ function memberText(t){const arr=t.members&&t.members.length?t.members:(t.member
 function memberColorFor(text){const first=String(text||'משפחה').split(/[,:]/)[0].trim(); return memberColors[first]||'#64748b'}
 function dupKey(t){return [t.card,t.date,clean(t.merchant),num(t.amount).toFixed(2)].join('|')}
 function importLog(s){const el=document.getElementById('importLog'); if(el)el.textContent += s+'\n'}
-async function importFiles(e){const files=[...e.target.files]; let total=0; for(const f of files){try{let text=''; if(f.name.toLowerCase().endsWith('.pdf')) text=await extractPdfText(f); else text=await f.text(); const added=parseText(text,f.name); total+=added; importLog(`${f.name}: יובאו ${added} עסקאות`)}catch(err){importLog(`${f.name}: שגיאה ${err.message||err}`); alert(`${f.name}: ${err.message||err}`)}} e.target.value=''; persist(); alert(`סה״כ יובאו ${total} עסקאות`); go('transactions')}
+
+async function importFiles(e){
+  const files=[...e.target.files];
+  let total=0;
+  for(const f of files){
+    try{
+      let added=0;
+      if(f.name.toLowerCase().endsWith('.pdf')){
+        const result=await parsePdfOnServer(f);
+        added=addImportedTransactions(result.transactions||[], f.name, result.diagnostics||{});
+        importLog(`${f.name}: יובאו ${added} עסקאות (שרת PDF). ${result.diagnostics?JSON.stringify(result.diagnostics):''}`);
+      } else {
+        const text=await f.text();
+        added=parseText(text,f.name);
+        importLog(`${f.name}: יובאו ${added} עסקאות (CSV/TXT)`);
+      }
+      total+=added;
+    }catch(err){
+      importLog(`${f.name}: שגיאה ${err.message||err}`);
+      alert(`${f.name}: ${err.message||err}`);
+    }
+  }
+  e.target.value='';
+  persist();
+  alert(`סה״כ יובאו ${total} עסקאות`);
+  go('transactions');
+}
+async function fileToBase64(file){
+  const buf=await file.arrayBuffer();
+  let binary='';
+  const bytes=new Uint8Array(buf);
+  const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));}
+  return btoa(binary);
+}
+async function parsePdfOnServer(file){
+  const base64=await fileToBase64(file);
+  const res=await fetch('/api/parse-card',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:file.name,base64})});
+  const text=await res.text();
+  let json; try{json=JSON.parse(text)}catch{json={ok:false,error:text||('HTTP '+res.status)}}
+  if(!res.ok||!json.ok) throw new Error(json.error||json.message||('HTTP '+res.status));
+  return json;
+}
+function addImportedTransactions(txs, fileName, diagnostics={}){
+  let added=0;
+  const existing=new Set(state.transactions.map(dupKey));
+  for(const raw of txs){
+    const merchant=cleanMerchant(raw.merchant||'');
+    const amount=num(raw.amount);
+    const tx={
+      id:id(),
+      year:state.year,
+      month:state.month,
+      date:raw.date||'',
+      merchant,
+      amount,
+      card:raw.card||'',
+      sourceCategory:raw.sourceCategory||'',
+      installment:raw.installment||'',
+      note:'',
+      sourceFile:fileName,
+      sourceIssuer:raw.issuer||'',
+      imported:true,
+      review:false,
+      category:guessCat(merchant,raw.sourceCategory||''),
+      members:guessMembers(merchant),
+      exceptional:false,
+      exceptionType:''
+    };
+    tx.member=memberText(tx);
+    tx.exceptional=guessExceptional(merchant,tx.category);
+    tx.exceptionType=tx.exceptional?guessExceptionType(merchant,tx.category):'';
+    tx.review=tx.category==='אחר' || !tx.merchant || !tx.card;
+    const k=dupKey(tx);
+    if(!existing.has(k)&&tx.date&&tx.merchant&&Number.isFinite(tx.amount)){
+      existing.add(k);
+      state.transactions.push(tx);
+      added++;
+    }
+  }
+  return added;
+}
 async function loadPdfJs(){if(window.pdfjsLib)return window.pdfjsLib; await new Promise((res,rej)=>{const sc=document.createElement('script'); sc.src='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js'; sc.onload=res; sc.onerror=()=>rej(new Error('לא ניתן לטעון pdf.js')); document.head.appendChild(sc)}); window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js'; return window.pdfjsLib}
 async function extractPdfText(file){const pdfjs=await loadPdfJs(); const buf=await file.arrayBuffer(); const pdf=await pdfjs.getDocument({data:buf}).promise; let all=[]; for(let p=1;p<=pdf.numPages;p++){const page=await pdf.getPage(p); const tc=await page.getTextContent(); const items=tc.items.map(it=>({s:it.str,x:it.transform[4],y:Math.round(it.transform[5])})).filter(it=>it.s&&it.s.trim()); const lines={}; items.forEach(it=>{(lines[it.y]||(lines[it.y]=[])).push(it)}); Object.keys(lines).sort((a,b)=>b-a).forEach(y=>{all.push(lines[y].sort((a,b)=>a.x-b.x).map(i=>i.s).join(' ').replace(/\s+/g,' ').trim())}); all.push('---PAGE---')} return all.join('\n')}
 function normalizeText(text){return String(text||'').replace(/\u200e|\u200f/g,' ').replace(/\r/g,'\n').replace(/סהכ/g,'סה"כ').replace(/[־–—]/g,'-')}
