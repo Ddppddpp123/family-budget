@@ -1,4 +1,4 @@
-# Ledger v16 - Stable Credit Import
+# Ledger v17 - Stable Credit Import
 
 This version keeps the existing Ledger data model and cloud backup, and replaces credit-card PDF import with a server-side Vercel parser.
 
@@ -24,3 +24,10 @@ The existing server backup continues to use:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `LEDGER_EMAIL`
 - `LEDGER_PASSWORD`
+
+
+## v17
+
+- Removed misleading installment placeholder text.
+- Added cleanup for suspicious repeated installment values imported by older builds.
+- Server-side PDF parser remains unchanged except for safer installment persistence.
