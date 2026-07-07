@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ledger v21</title>
+  <title>Ledger v22</title>
     <style>
     :root{--bg:#f4f7fb;--panel:#fff;--ink:#0f172a;--muted:#667085;--line:#dbe3ef;--blue:#2563eb;--green:#059669;--red:#dc2626;--amber:#b45309;--nav:#0f172a}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,'Noto Sans Hebrew','Segoe UI',sans-serif;color:var(--ink);font-size:14px}
@@ -33,7 +33,7 @@
     <div id="cloudBadge" class="cloudBadge bad">ענן: לא מחובר<br><span id="cloudSmall">שמירה מקומית פעילה</span></div>
   </aside>
   <main class="main">
-    <div class="top"><div class="title"><small>LEDGER V21</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
+    <div class="top"><div class="title"><small>LEDGER V22</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
     <div id="content"></div>
   </main>
 </div>
@@ -42,7 +42,7 @@
 <datalist id="membersList"><option value="משפחה"><option value="פיני"><option value="מעיין"><option value="יובל"><option value="ירדן"><option value="יואב"><option value="יואב, ירדן"><option value="יובל:50, ירדן:50"></datalist>
 <script>
 
-const APP_VERSION='v21';
+const APP_VERSION='v22';
 const LS='ledger-v9-state'; const CFG='ledger-v9-config';
 const months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 const defaultCategories=['בית','הוצאות מזדמנות לבית','סופר','מסעדות','בגדים','ילדים','חינוך','בריאות','רכב','דלק','ביטוח','תקשורת','נופש','בילויים','כלבים','עבודה','חסכונות','משכנתא','קיזוז','מסים','העברות','מתנות','יופי','פארמה','מחשבים','אחר'];
@@ -170,7 +170,7 @@ const views={
   categories(){return `<div class="panel"><div class="input2"><input id="newcat" placeholder="קטגוריה חדשה"><input id="newcatcolor" type="color" value="#2563eb"><button class="btn primary" onclick="addCat()">הוסף</button></div>${state.categories.map(c=>`<div class="row"><input value="${esc(c.name)}" onchange="updCat('${c.id}','name',this.value)"><input type="color" value="${c.color}" onchange="updCat('${c.id}','color',this.value)"><span class="colorTag" style="background:${c.color}">${esc(c.name)}</span><button class="btn red" onclick="delCat('${c.id}')">מחק</button></div>`).join('')}</div>`},
  import(){return `<div class="panel"><h3>ייבוא CSV / PDF חכם</h3><div class="drop"><p>בחר קבצי ישראכרט, MAX, כאל או CSV. המערכת תזהה ספק, סכום, כרטיס, קטגוריה ובני משפחה לפי כללים שנלמדו.</p><button class="btn primary" onclick="fileInput.click()">בחר קבצים</button></div><div class="warn" style="margin-top:14px">לפני שמירה סופית, בדוק במסך פירוט עסקאות את השורות החדשות. שינוי קטגוריה או שיוך לבני משפחה יישמר ככלל לפעמים הבאות.</div><pre class="log" id="importLog"></pre></div>`},
  backup(){return `<div class="grid2"><div class="panel"><h3>גיבוי JSON</h3><button class="btn primary" onclick="downloadBackup()">הורד גיבוי JSON</button></div><div class="panel"><h3>שחזור JSON</h3><button class="btn amber" onclick="restoreInput.click()">שחזר מקובץ</button></div></div>`},
- cloud(){return `<div class="panel cloud"><h3>גיבוי ענן - שרת Vercel</h3><div class="hint">גרסה זו לא שולחת את הדפדפן ישירות ל-Supabase. האתר קורא ל-Vercel Function, והשרת שומר את הנתונים ב-Supabase. אין מיילים, אין Redirect, ואין Anon Key בתוך האתר.</div><div class="row" style="grid-template-columns:1fr 1fr auto auto;margin-top:14px"><input id="cEmail" placeholder="Email" value="${esc(config.email||'')}"><input id="cPass" placeholder="סיסמת Ledger" value="${esc(config.password||'')}" type="password"><button class="btn primary" onclick="saveCloudConfig()">שמור</button><button class="btn" onclick="testCloud()">בדיקת שרת</button></div><div class="toolbar"><button class="btn primary" onclick="signIn()">טען מהענן / כניסה</button><button class="btn primary" onclick="saveCloudNow()">שמור לענן עכשיו</button><button class="btn" onclick="cloudSnapshot()">צור Snapshot</button><button class="btn red" onclick="signOut()">התנתק</button></div><div class="warn">סטטוס: ${cloudSession?'מחובר':'לא מחובר'}${state.lastCloudAt?' · נשמר לאחרונה: '+state.lastCloudAt:''}</div><pre class="log" id="log"></pre></div>`},
+ cloud(){return `<div class="panel cloud"><h3>גיבוי ענן - שרת Vercel</h3><div class="hint"><b>מצב בטוח:</b> הנתונים נשמרים דרך Vercel Function ל-Supabase. שמירה לענן לא תדרוס נתונים קיימים אם האתר המקומי ריק. לפני כל שמירה נוצרת Snapshot אוטומטית של הענן.</div><div class="row" style="grid-template-columns:1fr 1fr auto auto;margin-top:14px"><input id="cEmail" placeholder="Email" value="${esc(config.email||'')}"><input id="cPass" placeholder="סיסמת Ledger" value="${esc(config.password||'')}" type="password"><button class="btn primary" onclick="saveCloudConfig()">שמור</button><button class="btn" onclick="testCloud()">בדיקת שרת</button></div><div class="toolbar"><button class="btn primary" onclick="signIn()">טען מהענן / כניסה</button><button class="btn primary" onclick="saveCloudNow()">שמור לענן עכשיו</button><button class="btn" onclick="cloudSnapshot()">צור Snapshot</button><button class="btn red" onclick="signOut()">התנתק</button></div><div class="warn">סטטוס: ${cloudSession?'מחובר':'לא מחובר'}${state.lastCloudAt?' · נשמר לאחרונה: '+state.lastCloudAt:''}</div><pre class="log" id="log"></pre></div>`},
  settings(){return `<div class="panel"><h3>הגדרות</h3><div class="hint">הכתובת הקבועה המומלצת: כתובת Vercel הקבועה של הפרויקט. עדכוני גרסה צריכים לעלות לאותה כתובת.</div></div>`}
 };
 function listMoney(type,label,ph){const items=currentItems(type); return `<div class="panel"><div class="hint" style="margin-bottom:12px">הנתונים במסך זה שייכים רק לחודש ${months[state.month]} ${state.year}. שינוי כאן לא ישנה חודשים אחרים.</div><div class="input2"><input id="n_${type}" placeholder="${ph}"><input id="a_${type}" type="number" placeholder="סכום"><button class="btn primary" onclick="addMoney('${type}')">הוסף ${label}</button></div>${items.map(x=>`<div class="row"><input value="${esc(x.name)}" onchange="updMoney('${type}','${x.id}','name',this.value)"><input type="number" value="${esc(x.amount)}" onchange="updMoney('${type}','${x.id}','amount',this.value)"><select onchange="updMoney('${type}','${x.id}','category',this.value)">${catOptions(x.category|| (type==='offsets'?'קיזוז':'אחר'))}</select><button class="btn red" onclick="delMoney('${type}','${x.id}')">מחק</button></div>`).join('')}</div>`}
@@ -441,6 +441,21 @@ function toISO(d){const p=String(d).split(/[\/.-]/).map(Number); if(!p[0]||!p[1]
 function downloadBackup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='ledger-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click()}
 async function restoreBackup(e){const f=e.target.files[0]; if(!f)return; state=ensureDefaults(JSON.parse(await f.text())); persist(); e.target.value=''}
 
+function dataStats(s){
+  const st=ensureDefaults(JSON.parse(JSON.stringify(s||blank())));
+  const nonZero = arr => (arr||[]).filter(x=>Math.abs(num(x.amount))>0.009).length;
+  return {
+    transactions:(st.transactions||[]).length,
+    incomeNonZero:nonZero(st.income),
+    fixedNonZero:nonZero(st.fixed),
+    offsetsNonZero:nonZero(st.offsets),
+    rules:Object.keys(st.merchantRules||{}).length+Object.keys(st.memberRules||{}).length+Object.keys(st.exceptionRules||{}).length,
+    categories:(st.categories||[]).length
+  };
+}
+function dataWeight(stats){return (stats.transactions||0)*10+(stats.incomeNonZero||0)*5+(stats.fixedNonZero||0)*5+(stats.offsetsNonZero||0)*5+(stats.rules||0)*2;}
+function statsText(stats){return `עסקאות ${stats.transactions||0}, הכנסות ${stats.incomeNonZero||0}, קבועות ${stats.fixedNonZero||0}, קיזוזים ${stats.offsetsNonZero||0}, חוקים ${stats.rules||0}`}
+function getLocalState(){try{return ensureDefaults(JSON.parse(localStorage.getItem(LS))||blank())}catch{return ensureDefaults(blank())}}
 function saveCloudConfig(){
   config.email=document.getElementById('cEmail').value.trim().toLowerCase();
   config.password=document.getElementById('cPass').value;
@@ -466,22 +481,83 @@ async function testCloud(){
   render();
 }
 async function signUp(){return testCloud()}
+async function fetchCloudState(){
+  const r=await callServer('load');
+  const remote=(r.data&&Object.keys(r.data).length)?ensureDefaults(r.data):null;
+  return {remote,updated_at:r.updated_at||null};
+}
 async function signIn(){
-  try{saveCloudConfig(); const r=await callServer('load'); cloudSession=true; log('LOGIN/LOAD OK'); if(r.data&&Object.keys(r.data).length){state=ensureDefaults(r.data); localStorage.setItem(LS,JSON.stringify(state));} render(); alert('התחברת ונטען מהענן');}
-  catch(e){cloudSession=false; log('LOGIN ERROR '+(e.message||e)); alert('שגיאת כניסה: '+(e.message||e)); render();}
+  try{
+    saveCloudConfig();
+    const {remote,updated_at}=await fetchCloudState();
+    cloudSession=true;
+    if(remote){
+      state=ensureDefaults(remote);
+      localStorage.setItem(LS,JSON.stringify(state));
+      log('LOAD CLOUD OK '+statsText(dataStats(state))+(updated_at?' updated '+updated_at:''));
+      render();
+      alert('נטען מהענן בהצלחה. '+statsText(dataStats(state)));
+    }else{
+      log('CLOUD EMPTY - local kept '+statsText(dataStats(state)));
+      render();
+      alert('הענן ריק. השארתי את הנתונים המקומיים. אם זו התקנה ראשונה, לחץ שמור לענן רק אחרי שבדקת שהמסכים נכונים.');
+    }
+  }catch(e){cloudSession=false; log('LOGIN/LOAD ERROR '+(e.message||e)); alert('שגיאת טעינה מהענן: '+(e.message||e)); render();}
 }
 async function signOut(){cloudSession=false; render()}
 async function loadCloud(){return signIn()}
 async function saveCloudNow(){
-  try{const payload={...state,lastCloudAt:new Date().toISOString()}; const r=await callServer('save',{data:payload}); cloudSession=true; state.lastCloudAt=new Date().toLocaleString('he-IL'); localStorage.setItem(LS,JSON.stringify(state)); log('Saved cloud'); render(); alert('נשמר בענן');}
-  catch(e){log('SAVE ERROR '+(e.message||e)); alert('שגיאת שמירה: '+(e.message||e));}
+  try{
+    saveCloudConfig();
+    const local=ensureDefaults(state);
+    const localStats=dataStats(local);
+    const localWeight=dataWeight(localStats);
+    let remote=null, remoteStats=null, remoteWeight=0;
+    try{const r=await fetchCloudState(); remote=r.remote; if(remote){remoteStats=dataStats(remote); remoteWeight=dataWeight(remoteStats)}}catch(e){log('Pre-save cloud check failed: '+(e.message||e));}
+    if(remote && remoteWeight>0 && localWeight===0){
+      alert('עצירה: הענן מכיל נתונים ('+statsText(remoteStats)+') אבל האתר המקומי ריק. כדי למנוע מחיקה, קודם לחץ "טען מהענן".');
+      return;
+    }
+    if(remote && remoteWeight>localWeight+20){
+      const ok=confirm('זהירות: בענן יש יותר נתונים מאשר במסך הנוכחי.\nענן: '+statsText(remoteStats)+'\nמקומי: '+statsText(localStats)+'\nלהמשיך ולדרוס את הענן?');
+      if(!ok)return;
+    }
+    if(remote){
+      try{await callServer('snapshot',{data:remote,reason:'auto-before-save-v22'}); log('Auto snapshot before save created');}catch(e){log('Auto snapshot failed: '+(e.message||e));}
+    }
+    const payload={...local,appVersion:APP_VERSION,lastCloudIso:new Date().toISOString(),lastCloudAt:new Date().toLocaleString('he-IL')};
+    await callServer('save',{data:payload});
+    cloudSession=true;
+    state=ensureDefaults(payload);
+    localStorage.setItem(LS,JSON.stringify(state));
+    log('Saved cloud '+statsText(dataStats(state)));
+    render();
+    alert('נשמר בענן. '+statsText(dataStats(state)));
+  }catch(e){log('SAVE ERROR '+(e.message||e)); alert('שגיאת שמירה: '+(e.message||e));}
 }
 async function cloudSnapshot(){
-  try{const r=await callServer('snapshot',{data:state,reason:'manual'}); cloudSession=true; log('Snapshot created'); alert('Snapshot נוצר בענן');}
+  try{saveCloudConfig(); await callServer('snapshot',{data:ensureDefaults(state),reason:'manual'}); cloudSession=true; log('Snapshot created'); alert('Snapshot נוצר בענן');}
   catch(e){log('SNAP ERROR '+(e.message||e)); alert('שגיאת Snapshot: '+(e.message||e));}
 }
 function scheduleCloudSave(){localStorage.setItem(LS,JSON.stringify(state)); if(!cloudSession)return; clearTimeout(saveTimer); saveTimer=setTimeout(()=>saveCloudNow().catch(()=>{}),1500)}
-window.addEventListener('load',async()=>{initSupabase(); render()});
+window.addEventListener('load',async()=>{
+  initSupabase();
+  render();
+  if(config.email && config.password){
+    setTimeout(async()=>{
+      try{
+        const {remote}=await fetchCloudState();
+        if(remote && dataWeight(dataStats(remote))>0){
+          state=ensureDefaults(remote);
+          localStorage.setItem(LS,JSON.stringify(state));
+          cloudSession=true;
+          log('Auto-loaded cloud '+statsText(dataStats(state)));
+          render();
+        }
+      }catch(e){log('Auto cloud load skipped: '+(e.message||e));}
+    },500);
+  }
+});
 render();
 
 </script>
