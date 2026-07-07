@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ledger v19</title>
+  <title>Ledger v21</title>
     <style>
     :root{--bg:#f4f7fb;--panel:#fff;--ink:#0f172a;--muted:#667085;--line:#dbe3ef;--blue:#2563eb;--green:#059669;--red:#dc2626;--amber:#b45309;--nav:#0f172a}
     *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Arial,'Noto Sans Hebrew','Segoe UI',sans-serif;color:var(--ink);font-size:14px}
@@ -19,6 +19,10 @@
     .cardSection{background:#e0f2fe;color:#075985;border:1px solid #bae6fd;border-radius:12px;padding:8px 12px;margin:14px 0 6px;font-weight:900;display:flex;justify-content:space-between;position:sticky;top:0;z-index:2}
     .creditTable{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:12px}.creditTable th{color:#475569;text-align:right;font-size:11px;padding:3px 6px}.creditTable td{background:#fff;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;padding:4px 6px;vertical-align:middle}.creditTable td:first-child{border-right:1px solid #e2e8f0;border-radius:0 8px 8px 0}.creditTable td:last-child{border-left:1px solid #e2e8f0;border-radius:8px 0 0 8px}.creditTable input,.creditTable select{height:28px;border:1px solid #dbe3ef;border-radius:7px;padding:3px 6px;background:#fff;font-size:12px}.merchantInput{min-width:240px;font-weight:800}.amountMini{width:86px;text-align:left;font-weight:900}.installMini{width:96px}.memberMini{display:flex;gap:3px;flex-wrap:wrap;min-width:220px}.memberBtn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:3px 6px;font-size:11px;font-weight:800;cursor:pointer}.memberBtn.on{color:#fff}.reviewRow td{background:#fff7ed}.exceptionMini{display:flex;gap:5px;align-items:center;white-space:nowrap}.catBadgeSelect{font-weight:900;border-right-width:7px!important}.muted{color:#64748b;font-size:11px}.importStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.statBox{border:1px solid #dbe3ef;background:#f8fafc;border-radius:12px;padding:9px;font-weight:900}
 
+
+    .insightList{display:grid;gap:10px;margin-top:12px}.insightRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid #e2e8f0;background:#fff;border-radius:14px;padding:12px}.insightRow small{display:block;color:#64748b;margin-top:4px;line-height:1.4}.insightRow strong{font-size:18px}.insightRow .bar{grid-column:1 / -1;height:9px}.exceptionalInsight{border-color:#fed7aa;background:#fff7ed}.memberInsightGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.memberInsight{border:1px solid #e2e8f0;border-radius:16px;background:#fff;padding:14px}.memberInsight h4{display:flex;align-items:center;gap:8px;margin:0 0 7px;font-size:17px}.memberInsight h4 strong{margin-right:auto}.memberInsight p{margin:0 0 9px;color:#64748b}.chipLine{display:flex;gap:7px;flex-wrap:wrap}.chipLine span{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:999px;padding:6px 9px;font-size:12px}
+    @media(max-width:1000px){.memberInsightGrid{grid-template-columns:1fr}}
+
   </style>
 </head>
 <body>
@@ -29,7 +33,7 @@
     <div id="cloudBadge" class="cloudBadge bad">ענן: לא מחובר<br><span id="cloudSmall">שמירה מקומית פעילה</span></div>
   </aside>
   <main class="main">
-    <div class="top"><div class="title"><small>LEDGER V19</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
+    <div class="top"><div class="title"><small>LEDGER V21</small><h2 id="pageTitle">תמונת חודש</h2><p id="pageSub">מערכת חודשית לניהול תקציב משפחתי</p></div><div class="month"><button onclick="moveMonth(-1)">›</button><b id="monthLabel"></b><button onclick="moveMonth(1)">‹</button></div></div>
     <div id="content"></div>
   </main>
 </div>
@@ -38,10 +42,10 @@
 <datalist id="membersList"><option value="משפחה"><option value="פיני"><option value="מעיין"><option value="יובל"><option value="ירדן"><option value="יואב"><option value="יואב, ירדן"><option value="יובל:50, ירדן:50"></datalist>
 <script>
 
-const APP_VERSION='v19';
+const APP_VERSION='v21';
 const LS='ledger-v9-state'; const CFG='ledger-v9-config';
 const months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
-const defaultCategories=['בית','תחזוקת בית','סופר','אוכל','מסעדות','בגדים','ילדים','חינוך','בריאות','רכב','דלק','ביטוח','תקשורת','נופש','בילויים','כלבים','עבודה','חסכונות','משכנתא','קיזוז','מסים','העברות','מתנות','יופי','פארמה','מחשבים','אחר'];
+const defaultCategories=['בית','הוצאות מזדמנות לבית','סופר','מסעדות','בגדים','ילדים','חינוך','בריאות','רכב','דלק','ביטוח','תקשורת','נופש','בילויים','כלבים','עבודה','חסכונות','משכנתא','קיזוז','מסים','העברות','מתנות','יופי','פארמה','מחשבים','אחר'];
 const exceptionTypes=['','חופשה בארץ','חופשה בחו"ל','בר/בת מצווה','אירוע משפחתי','שיפוץ','רכב חריג','ריהוט','ציוד לבית','בריאות חריגה','חינוך חריג','אחר'];
 const catColors=['#2563eb','#0891b2','#059669','#65a30d','#ca8a04','#ea580c','#dc2626','#be185d','#9333ea','#4f46e5','#0f766e','#475569'];
 const members=['משפחה','פיני','מעיין','יובל','ירדן','יואב'];
@@ -56,7 +60,61 @@ function blank(){return {year:2026,month:6,income:[],fixed:[],offsets:[],transac
 function loadState(){try{return ensureDefaults(JSON.parse(localStorage.getItem(LS))||blank())}catch{return ensureDefaults(blank())}}
 function loadConfig(){try{return JSON.parse(localStorage.getItem(CFG))||{}}catch{return {}}}
 function saveConfig(){localStorage.setItem(CFG,JSON.stringify(config))}
-function ensureDefaults(s){s.categories=s.categories||[]; defaultCategories.forEach((n,i)=>{if(!s.categories.find(c=>c.name===n))s.categories.push({id:id(),name:n,color:catColors[i%catColors.length]})}); s.income=s.income||[]; defaultIncome.forEach(n=>{if(!s.income.find(x=>x.name===n))s.income.push({id:id(),name:n,amount:0})}); s.fixed=s.fixed||[]; defaultFixed.forEach(n=>{if(!s.fixed.find(x=>x.name===n))s.fixed.push({id:id(),name:n,amount:0,category:n.includes('משכנתא')?'משכנתא':'חסכונות'})}); s.offsets=s.offsets||[]; defaultOffsets.forEach(n=>{if(!s.offsets.find(x=>x.name===n))s.offsets.push({id:id(),name:n,amount:0,category:'קיזוז'})}); s.transactions=s.transactions||[]; s.cardTotals=s.cardTotals||{}; s.merchantRules=s.merchantRules||{}; s.memberRules=s.memberRules||{}; s.exceptionRules=s.exceptionRules||{}; s.transactions.forEach(t=>{if(t.exceptional==null)t.exceptional=false; if(t.exceptionType==null)t.exceptionType=''; if(!t.members&&t.member)t.members=parseMembers(t.member); t.installment=normalizeInstallment(t.installment||'')}); sanitizeSuspiciousInstallments(s,false); return s}
+const LEGACY_RECURRING_YEAR=2026;
+const LEGACY_RECURRING_MONTH=6; // July 2026. Existing manually-entered income/fixed/offset data belonged to July.
+function normalizeCategoryName(n){
+  const x=String(n||'').trim();
+  if(x==='הוצאות מזדמנות לבית')return 'הוצאות מזדמנות לבית';
+  if(x==='אוכל')return 'סופר';
+  return x||'אחר';
+}
+function normalizeCategoryData(s){
+  s.categories=s.categories||[];
+  const seen=new Map();
+  s.categories.forEach((c,i)=>{
+    const name=normalizeCategoryName(c.name);
+    if(!seen.has(name))seen.set(name,{...c,name,color:c.color||catColors[i%catColors.length]});
+  });
+  s.categories=[...seen.values()];
+  ['income','fixed','offsets','transactions'].forEach(type=>{
+    (s[type]||[]).forEach(item=>{if(item.category)item.category=normalizeCategoryName(item.category)});
+  });
+  if(s.merchantRules){
+    Object.values(s.merchantRules).forEach(r=>{
+      if(typeof r==='object'&&r&&r.category)r.category=normalizeCategoryName(r.category);
+    });
+  }
+}
+function ensureDefaults(s){
+  s.year=s.year??2026; s.month=s.month??6;
+  s.categories=s.categories||[];
+  normalizeCategoryData(s);
+  defaultCategories.forEach((n,i)=>{if(!s.categories.find(c=>c.name===n))s.categories.push({id:id(),name:n,color:catColors[i%catColors.length]})});
+  s.income=s.income||[]; s.fixed=s.fixed||[]; s.offsets=s.offsets||[];
+  migrateRecurringItems(s);
+  ensureMonthlyRecurringDefaults(s,s.year,s.month);
+  s.transactions=s.transactions||[]; s.cardTotals=s.cardTotals||{}; s.merchantRules=s.merchantRules||{}; s.memberRules=s.memberRules||{}; s.exceptionRules=s.exceptionRules||{};
+  s.transactions.forEach(t=>{if(t.exceptional==null)t.exceptional=false; if(t.exceptionType==null)t.exceptionType=''; if(!t.members&&t.member)t.members=parseMembers(t.member); t.installment=normalizeInstallment(t.installment||'')});
+  sanitizeSuspiciousInstallments(s,false);
+  return s
+}
+function migrateRecurringItems(s){
+  ['income','fixed','offsets'].forEach(type=>{
+    s[type]=(s[type]||[]).map(item=>{
+      if(item.year==null||item.month==null){
+        return {...item,year:LEGACY_RECURRING_YEAR,month:LEGACY_RECURRING_MONTH};
+      }
+      return item;
+    });
+  });
+}
+function ensureMonthlyRecurringDefaults(s,y=state?.year??2026,m=state?.month??6){
+  s.income=s.income||[]; s.fixed=s.fixed||[]; s.offsets=s.offsets||[];
+  defaultIncome.forEach(n=>{if(!s.income.find(x=>x.name===n&&Number(x.year)===Number(y)&&Number(x.month)===Number(m)))s.income.push({id:id(),name:n,amount:0,year:y,month:m})});
+  defaultFixed.forEach(n=>{if(!s.fixed.find(x=>x.name===n&&Number(x.year)===Number(y)&&Number(x.month)===Number(m)))s.fixed.push({id:id(),name:n,amount:0,category:n.includes('משכנתא')?'משכנתא':'חסכונות',year:y,month:m})});
+  defaultOffsets.forEach(n=>{if(!s.offsets.find(x=>x.name===n&&Number(x.year)===Number(y)&&Number(x.month)===Number(m)))s.offsets.push({id:id(),name:n,amount:0,category:'קיזוז',year:y,month:m})});
+}
+function currentItems(type){ensureMonthlyRecurringDefaults(state,state.year,state.month); return (state[type]||[]).filter(x=>Number(x.year)===Number(state.year)&&Number(x.month)===Number(state.month))}
 function normalizeInstallment(v){const m=String(v||'').replace(/\s+/g,' ').trim().match(/^(\d{1,2})\s*מתוך\s*(\d{1,2})$/); if(!m)return ''; const cur=Number(m[1]), total=Number(m[2]); if(!cur||!total||cur>total||total<2)return ''; return `${cur} מתוך ${total}`}
 function sanitizeSuspiciousInstallments(s,manual=false){let changed=0; const txs=s.transactions||[]; const totals={}; const groups={}; txs.forEach(t=>{const y=t.year??s.year??state?.year??2026, m=t.month??s.month??state?.month??6, c=t.card||'ללא'; const base=[y,m,c].join('|'); totals[base]=(totals[base]||0)+1; const inst=normalizeInstallment(t.installment||''); t.installment=inst; if(inst){const k=base+'|'+inst; (groups[k]||(groups[k]=[])).push(t)}}); Object.entries(groups).forEach(([k,list])=>{const base=k.split('|').slice(0,3).join('|'); const suspicious=list.length>=6 && (manual || list.length/(totals[base]||1)>0.25); if(!suspicious)return; list.forEach(t=>{const evidence=String(t.raw||'').includes(t.installment); if(!evidence){t.installment=''; changed++}})}); return changed}
 function persist(){state=ensureDefaults(state); localStorage.setItem(LS,JSON.stringify(state)); render()}
@@ -68,7 +126,7 @@ function cardTotalsForMonth(){state.cardTotals=state.cardTotals||{}; return stat
 function setCardTotal(card,value){state.cardTotals=state.cardTotals||{}; const k=monthKey(); state.cardTotals[k]=state.cardTotals[k]||{}; const v=num(value); if(card){state.cardTotals[k][card]=Math.round(v*100)/100} persist()}
 function recordCardTotals(totals){if(!totals||!Object.keys(totals).length)return; state.cardTotals=state.cardTotals||{}; const k=monthKey(); state.cardTotals[k]=state.cardTotals[k]||{}; for(const [card,value] of Object.entries(totals)){if(card)state.cardTotals[k][card]=Math.round(num(value)*100)/100}}
 
-function totals(){const inc=state.income.reduce((a,b)=>a+num(b.amount),0); const fixed=state.fixed.reduce((a,b)=>a+num(b.amount),0); const off=state.offsets.reduce((a,b)=>a+num(b.amount),0); const tx=byMonth(state.transactions); const chargeable=tx.filter(t=>t.category!=='קיזוז'); const exceptionalTx=chargeable.filter(t=>!!t.exceptional); const regularTx=chargeable.filter(t=>!t.exceptional); const statementTotals=cardTotalsForMonth(); const hasStatement=Object.keys(statementTotals).length>0; const statementSum=Object.values(statementTotals).reduce((a,b)=>a+num(b),0); const itemizedSum=chargeable.reduce((a,b)=>a+num(b.amount),0); const card=hasStatement?statementSum:itemizedSum; const cardExceptional=exceptionalTx.reduce((a,b)=>a+num(b.amount),0); const cardRegular=card-cardExceptional; const ignored=tx.filter(t=>t.category==='קיזוז').reduce((a,b)=>a+num(b.amount),0); const expensesRegular=fixed+cardRegular; const expenses=fixed+card; return {inc,fixed,off,card,cardRegular,cardExceptional,ignored,expensesRegular,expenses,balanceRegular:inc-expensesRegular,balance:inc-expenses,netAfterOffsetsRegular:inc-expensesRegular+off,netAfterOffsets:inc-expenses+off,tx,regularTx,exceptionalTx,review:tx.filter(t=>t.review).length,statementTotals,hasStatement,itemizedSum}}
+function totals(){const inc=currentItems('income').reduce((a,b)=>a+num(b.amount),0); const fixed=currentItems('fixed').reduce((a,b)=>a+num(b.amount),0); const off=currentItems('offsets').reduce((a,b)=>a+num(b.amount),0); const tx=byMonth(state.transactions); const chargeable=tx.filter(t=>t.category!=='קיזוז'); const exceptionalTx=chargeable.filter(t=>!!t.exceptional); const regularTx=chargeable.filter(t=>!t.exceptional); const statementTotals=cardTotalsForMonth(); const hasStatement=Object.keys(statementTotals).length>0; const statementSum=Object.values(statementTotals).reduce((a,b)=>a+num(b),0); const itemizedSum=chargeable.reduce((a,b)=>a+num(b.amount),0); const card=hasStatement?statementSum:itemizedSum; const cardExceptional=exceptionalTx.reduce((a,b)=>a+num(b.amount),0); const cardRegular=card-cardExceptional; const ignored=tx.filter(t=>t.category==='קיזוז').reduce((a,b)=>a+num(b.amount),0); const expensesRegular=fixed+cardRegular; const expenses=fixed+card; return {inc,fixed,off,card,cardRegular,cardExceptional,ignored,expensesRegular,expenses,balanceRegular:inc-expensesRegular,balance:inc-expenses,netAfterOffsetsRegular:inc-expensesRegular+off,netAfterOffsets:inc-expenses+off,tx,regularTx,exceptionalTx,review:tx.filter(t=>t.review).length,statementTotals,hasStatement,itemizedSum}}
 function num(v){if(typeof v==='number')return v; return Number(String(v||'').replace(/,/g,'').replace(/[₪\s]/g,''))||0}
 function cat(name){return state.categories.find(c=>c.name===name)||state.categories.find(c=>c.name==='אחר')}
 function catOptions(sel){return state.categories.map(c=>`<option ${c.name===sel?'selected':''}>${esc(c.name)}</option>`).join('')}
@@ -77,11 +135,32 @@ function exceptionTypeOptions(sel){return exceptionTypes.map(x=>`<option value="
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function nav(){document.getElementById('nav').innerHTML=screens.map(([k,v])=>`<button class="${screen===k?'active':''}" onclick="go('${k}')">${v}</button>`).join('')}
 function go(s){screen=s; render()}
-function moveMonth(d){state.month+=d;if(state.month<0){state.month=11;state.year--}if(state.month>11){state.month=0;state.year++}persist()}
+function moveMonth(d){state.month+=d;if(state.month<0){state.month=11;state.year--}if(state.month>11){state.month=0;state.year++}ensureMonthlyRecurringDefaults(state,state.year,state.month); persist()}
 function render(){nav(); document.getElementById('monthLabel').textContent=months[state.month]+' '+state.year; const map={dashboard:['תמונת חודש','האם חסכת, לאן הלך הכסף ומה דורש טיפול'],income:['הכנסות','משכורות והכנסות נוספות'],fixed:['הוצאות קבועות','הוצאות שאינן אשראי'],offsets:['קיזוזים','סכומים שאינם צריכים להיחשב כהוצאה'],transactions:['פירוט עסקאות','שיוך לבני משפחה, קטגוריות והערות'],categories:['קטגוריות','ניהול צבעים וכללי סיווג'],import:['ייבוא קבצים','CSV ו-PDF טקסטואלי'],backup:['גיבוי ושחזור','JSON מקומי'],cloud:['גיבוי ענן','שמירה דרך Vercel Function ל-Supabase'],settings:['הגדרות','הגדרות בסיסיות']}; document.getElementById('pageTitle').textContent=map[screen][0];document.getElementById('pageSub').textContent=map[screen][1]; updateCloudBadge(); document.getElementById('content').innerHTML=views[screen](); bindAfterRender()}
 function updateCloudBadge(){const b=document.getElementById('cloudBadge'),s=document.getElementById('cloudSmall'); if(cloudSession){b.className='cloudBadge good'; b.firstChild.nodeValue='ענן: מחובר'; s.textContent='מחובר. שמירה לענן ידנית לפי בקשה'} else {b.className='cloudBadge bad'; b.firstChild.nodeValue='ענן: לא מחובר'; s.textContent='שמירה מקומית פעילה'}}
 const views={
- dashboard(){const t=totals(); const top=Object.entries(group(t.regularTx,'category')).sort((a,b)=>b[1]-a[1]).slice(0,8); const max=Math.max(1,...top.map(x=>x[1])); return `<div class="section"><div class="cards"><div class="card"><h3>הכנסות</h3><div class="big">${money(t.inc)}</div></div><div class="card"><h3>הוצאות רגילות</h3><div class="big">${money(t.expensesRegular)}</div><small>קבועות ${money(t.fixed)} · אשראי רגיל ${money(t.cardRegular)}</small></div><div class="card"><h3>הוצאות חריגות</h3><div class="big red">${money(t.cardExceptional)}</div><small>${t.exceptionalTx.length} עסקאות חריגות</small></div><div class="card"><h3>מאזן רגיל / כולל</h3><div class="big ${t.balanceRegular>=0?'green':'red'}">${money(t.balanceRegular)}</div><small>כולל חריגות: <b class="${t.balance>=0?'green':'red'}">${money(t.balance)}</b></small></div></div><div class="cards"><div class="card"><h3>סך חיובי אשראי</h3><div class="big">${money(t.card)}</div><small>${t.hasStatement?'לפי סיכום הכרטיסים':'לפי סכום העסקאות'}</small></div><div class="card"><h3>קיזוזים</h3><div class="big">${money(t.off)}</div><small>מוצגים בנפרד. לא מתווספים למאזן כהכנסה.</small></div><div class="card"><h3>דורש בדיקה</h3><div class="big">${t.review}</div><small>עסקאות: ${t.tx.length}</small></div><div class="card"><h3>פער פירוט/סיכום</h3><div class="big">${money(t.card-t.itemizedSum)}</div><small>סיכום כרטיסים פחות עסקאות מפורטות</small></div></div><div class="hint"><b>חישוב מאזן עודכן:</b> קיזוזים אינם מגדילים את המאזן ואינם נספרים כהכנסה. המאזן מחושב כ־הכנסות פחות הוצאות קבועות ופחות חיובי אשראי. הקיזוזים מוצגים בנפרד לבקרה.</div><div class="grid2"><div class="panel"><h3>לאן הלך הכסף - ללא חריגות</h3><div class="summaryList">${top.length?top.map(([k,v])=>`<div><b>${esc(k||'אחר')}</b> <span>${money(v)}</span><div class="bar"><span style="width:${Math.round(v/max*100)}%"></span></div>${categoryMerchantDetails(t.regularTx,k)}</div>`).join(''):'<div class="hint">אין עסקאות רגילות עדיין.</div>'}</div></div><div class="panel"><h3>הוצאות חריגות - פירוט</h3>${exceptionDetails(t.exceptionalTx)}</div></div><div class="panel"><h3>בני משפחה - פירוט</h3>${memberDetails(t.tx.filter(x=>x.category!=='קיזוז'))}</div></div>`},
+ dashboard(){
+  const t=totals();
+  return `<div class="section">
+    <div class="cards">
+      <div class="card"><h3>הכנסות</h3><div class="big">${money(t.inc)}</div></div>
+      <div class="card"><h3>הוצאות רגילות</h3><div class="big">${money(t.expensesRegular)}</div><small>קבועות ${money(t.fixed)} · אשראי רגיל ${money(t.cardRegular)}</small></div>
+      <div class="card"><h3>הוצאות חריגות</h3><div class="big red">${money(t.cardExceptional)}</div><small>${t.exceptionalTx.length} עסקאות חריגות</small></div>
+      <div class="card"><h3>מאזן רגיל / כולל</h3><div class="big ${t.balanceRegular>=0?'green':'red'}">${money(t.balanceRegular)}</div><small>כולל חריגות: <b class="${t.balance>=0?'green':'red'}">${money(t.balance)}</b></small></div>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>סך חיובי אשראי</h3><div class="big">${money(t.card)}</div><small>${t.hasStatement?'לפי סיכום הכרטיסים':'לפי סכום העסקאות'}</small></div>
+      <div class="card"><h3>קיזוזים</h3><div class="big">${money(t.off)}</div><small>מוצגים בנפרד. לא מתווספים למאזן כהכנסה.</small></div>
+      <div class="card"><h3>דורש בדיקה</h3><div class="big">${t.review}</div><small>עסקאות: ${t.tx.length}</small></div>
+      <div class="card"><h3>פער פירוט/סיכום</h3><div class="big">${money(t.card-t.itemizedSum)}</div><small>סיכום כרטיסים פחות עסקאות מפורטות</small></div>
+    </div>
+    <div class="hint"><b>תמונת חודש:</b> המאזן הרגיל מתעלם מהוצאות שסימנת כחריגות. המאזן הכולל כולל אותן. הקיזוזים מוצגים לבקרה אך אינם מגדילים הכנסה.</div>
+    <div class="grid2">
+      <div class="panel"><h3>לאן הלך הכסף - ללא חריגות</h3>${categoryInsights()}</div>
+      <div class="panel"><h3>הוצאות חריגות - הסבר</h3>${exceptionInsights(t.exceptionalTx)}</div>
+    </div>
+    <div class="panel"><h3>בני משפחה - מה באמת עלה כסף</h3>${memberInsights(t.tx.filter(x=>x.category!=='קיזוז'))}</div>
+  </div>`},
   income(){return listMoney('income','הכנסה','שם הכנסה')}, fixed(){return listMoney('fixed','הוצאה קבועה','שם הוצאה')}, offsets(){return listMoney('offsets','קיזוז','שם קיזוז')},
  transactions(){
  const all=byMonth(state.transactions).sort(sortTx); let shown=0; let html=''; let lastCard=null; const statement=cardTotalsForMonth();
@@ -94,15 +173,80 @@ const views={
  cloud(){return `<div class="panel cloud"><h3>גיבוי ענן - שרת Vercel</h3><div class="hint">גרסה זו לא שולחת את הדפדפן ישירות ל-Supabase. האתר קורא ל-Vercel Function, והשרת שומר את הנתונים ב-Supabase. אין מיילים, אין Redirect, ואין Anon Key בתוך האתר.</div><div class="row" style="grid-template-columns:1fr 1fr auto auto;margin-top:14px"><input id="cEmail" placeholder="Email" value="${esc(config.email||'')}"><input id="cPass" placeholder="סיסמת Ledger" value="${esc(config.password||'')}" type="password"><button class="btn primary" onclick="saveCloudConfig()">שמור</button><button class="btn" onclick="testCloud()">בדיקת שרת</button></div><div class="toolbar"><button class="btn primary" onclick="signIn()">טען מהענן / כניסה</button><button class="btn primary" onclick="saveCloudNow()">שמור לענן עכשיו</button><button class="btn" onclick="cloudSnapshot()">צור Snapshot</button><button class="btn red" onclick="signOut()">התנתק</button></div><div class="warn">סטטוס: ${cloudSession?'מחובר':'לא מחובר'}${state.lastCloudAt?' · נשמר לאחרונה: '+state.lastCloudAt:''}</div><pre class="log" id="log"></pre></div>`},
  settings(){return `<div class="panel"><h3>הגדרות</h3><div class="hint">הכתובת הקבועה המומלצת: כתובת Vercel הקבועה של הפרויקט. עדכוני גרסה צריכים לעלות לאותה כתובת.</div></div>`}
 };
-function listMoney(type,label,ph){return `<div class="panel"><div class="input2"><input id="n_${type}" placeholder="${ph}"><input id="a_${type}" type="number" placeholder="סכום"><button class="btn primary" onclick="addMoney('${type}')">הוסף ${label}</button></div>${state[type].map(x=>`<div class="row"><input value="${esc(x.name)}" onchange="updMoney('${type}','${x.id}','name',this.value)"><input type="number" value="${esc(x.amount)}" onchange="updMoney('${type}','${x.id}','amount',this.value)"><select onchange="updMoney('${type}','${x.id}','category',this.value)">${catOptions(x.category|| (type==='offsets'?'קיזוז':'אחר'))}</select><button class="btn red" onclick="delMoney('${type}','${x.id}')">מחק</button></div>`).join('')}</div>`}
+function listMoney(type,label,ph){const items=currentItems(type); return `<div class="panel"><div class="hint" style="margin-bottom:12px">הנתונים במסך זה שייכים רק לחודש ${months[state.month]} ${state.year}. שינוי כאן לא ישנה חודשים אחרים.</div><div class="input2"><input id="n_${type}" placeholder="${ph}"><input id="a_${type}" type="number" placeholder="סכום"><button class="btn primary" onclick="addMoney('${type}')">הוסף ${label}</button></div>${items.map(x=>`<div class="row"><input value="${esc(x.name)}" onchange="updMoney('${type}','${x.id}','name',this.value)"><input type="number" value="${esc(x.amount)}" onchange="updMoney('${type}','${x.id}','amount',this.value)"><select onchange="updMoney('${type}','${x.id}','category',this.value)">${catOptions(x.category|| (type==='offsets'?'קיזוז':'אחר'))}</select><button class="btn red" onclick="delMoney('${type}','${x.id}')">מחק</button></div>`).join('')}</div>`}
 function group(arr,key){return arr.reduce((a,x)=>{const k=x[key]||'אחר'; a[k]=(a[k]||0)+num(x.amount); return a},{})}
 function groupMembers(arr){return arr.reduce((a,t)=>{const ms=t.members&&t.members.length?t.members:parseMembers(t.member||'משפחה'); ms.forEach(m=>{a[m.member]=(a[m.member]||0)+num(t.amount)*(num(m.percent)/100)}); return a},{})}
-function categoryMerchantDetails(arr,catName){const rows=arr.filter(t=>(t.category||'אחר')===catName); const by={}; rows.forEach(t=>{const k=t.merchant||'לא ידוע'; by[k]=(by[k]||0)+num(t.amount)}); const top=Object.entries(by).sort((a,b)=>b[1]-a[1]).slice(0,4); return top.length?`<div class="muted">${top.map(([m,v])=>`${esc(m)} ${money(v)}`).join(' · ')}</div>`:''}
-function exceptionDetails(arr){if(!arr.length)return '<div class="hint">אין הוצאות חריגות החודש.</div>'; const by={}; arr.forEach(t=>{const k=t.exceptionType||'חריג - אחר'; (by[k]||(by[k]=[])).push(t)}); return Object.entries(by).sort((a,b)=>b[1].reduce((s,t)=>s+num(t.amount),0)-a[1].reduce((s,t)=>s+num(t.amount),0)).map(([type,rows])=>{const total=rows.reduce((s,t)=>s+num(t.amount),0); const list=rows.sort((a,b)=>num(b.amount)-num(a.amount)).slice(0,6).map(t=>`<div class="muted">${esc(t.date)} · ${esc(t.merchant)} · ${money(t.amount)} · כרטיס ${esc(t.card||'')}</div>`).join(''); return `<div style="margin-bottom:12px"><b>${esc(type)}</b> ${money(total)}${list}</div>`}).join('')}
-function memberDetails(arr){if(!arr.length)return '<div class="hint">אין נתונים עדיין.</div>'; const data={}; arr.forEach(t=>{const ms=t.members&&t.members.length?t.members:parseMembers(t.member||'משפחה'); ms.forEach(m=>{const part=num(t.amount)*num(m.percent)/100; const d=data[m.member]||(data[m.member]={total:0,cats:{},items:[]}); d.total+=part; d.cats[t.category||'אחר']=(d.cats[t.category||'אחר']||0)+part; d.items.push({...t,part})})}); return Object.entries(data).sort((a,b)=>b[1].total-a[1].total).map(([name,d])=>{const cats=Object.entries(d.cats).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([c,v])=>`${esc(c)} ${money(v)}`).join(' · '); const items=d.items.sort((a,b)=>num(b.part)-num(a.part)).slice(0,5).map(t=>`<div class="muted">${esc(t.date)} · ${esc(t.merchant)} · ${money(t.part)}</div>`).join(''); return `<div style="border-bottom:1px solid #e2e8f0;padding:8px 0"><span class="memdot" style="background:${memberColors[name]||'#64748b'}"></span> <b>${esc(name)}</b> ${money(d.total)}<div class="muted">${cats}</div>${items}</div>`}).join('')}
+function previousMonthOf(y=state.year,m=state.month){let py=Number(y),pm=Number(m)-1;if(pm<0){pm=11;py--}return {year:py,month:pm}}
+function expenseItemsForMonth(y=state.year,m=state.month,{exceptional='regular'}={}){
+  const tx=(state.transactions||[]).filter(t=>Number(t.year??state.year)===Number(y)&&Number(t.month??state.month)===Number(m)&&t.category!=='קיזוז');
+  const filtered=tx.filter(t=>exceptional==='all'?true:exceptional==='exceptional'?!!t.exceptional:!t.exceptional);
+  const fixed=(state.fixed||[]).filter(x=>Number(x.year)===Number(y)&&Number(x.month)===Number(m)).map(x=>({category:normalizeCategoryName(x.category||x.name||'הוצאות קבועות'),amount:num(x.amount),fixed:true}));
+  return exceptional==='regular' ? filtered.concat(fixed) : filtered;
+}
+function summarizeByCategory(items){
+  const out={};
+  items.forEach(t=>{const k=normalizeCategoryName(t.category||'אחר'); const d=out[k]||(out[k]={total:0,count:0}); d.total+=num(t.amount); d.count++});
+  return out;
+}
+function deltaText(cur,prev){
+  const d=cur-prev;
+  if(prev>0&&Math.abs(d)>=1)return d>0?`עלה ב־${money(d)}`:`ירד ב־${money(Math.abs(d))}`;
+  if(prev<=0&&cur>0)return 'חדש החודש';
+  return 'ללא שינוי מהותי';
+}
+function categoryInsights(){
+  const cur=summarizeByCategory(expenseItemsForMonth());
+  const prevDate=previousMonthOf();
+  const prev=summarizeByCategory(expenseItemsForMonth(prevDate.year,prevDate.month));
+  const rows=Object.entries(cur).filter(([_,d])=>Math.abs(d.total)>0.01).sort((a,b)=>b[1].total-a[1].total);
+  if(!rows.length)return '<div class="hint">אין עדיין מספיק נתונים רגילים לחודש הזה.</div>';
+  const total=rows.reduce((s,[,d])=>s+d.total,0)||1;
+  const top=rows.slice(0,10).map(([cat,d])=>{
+    const p=prev[cat]?.total||0;
+    const pct=Math.round(d.total/total*100);
+    return `<div class="insightRow">
+      <div><b>${esc(cat)}</b><small>${d.count} פריטים · ${pct}% מההוצאות הרגילות · ${deltaText(d.total,p)}</small></div>
+      <strong>${money(d.total)}</strong>
+      <div class="bar"><span style="width:${Math.min(100,pct)}%"></span></div>
+    </div>`;
+  }).join('');
+  const biggest=rows[0];
+  const msg=biggest?`הקטגוריה הגדולה החודש היא <b>${esc(biggest[0])}</b> עם ${money(biggest[1].total)}. זה המקום הראשון לבדוק אם רוצים לצמצם הוצאות רגילות.`:'';
+  return `<div class="hint">${msg}</div><div class="insightList">${top}</div>`;
+}
+function exceptionInsights(arr){
+  if(!arr.length)return '<div class="hint">לא סומנו הוצאות חריגות החודש. אם הייתה חופשה, אירוע, רכב או רכישה חד־פעמית גדולה — סמן אותה כחריגה בפירוט העסקאות.</div>';
+  const byType={};
+  arr.forEach(t=>{const type=t.exceptionType||'חריג - אחר'; const d=byType[type]||(byType[type]={total:0,count:0,cats:{}}); d.total+=num(t.amount); d.count++; const cat=normalizeCategoryName(t.category||'אחר'); d.cats[cat]=(d.cats[cat]||0)+num(t.amount)});
+  const rows=Object.entries(byType).sort((a,b)=>b[1].total-a[1].total).map(([type,d])=>{
+    const cats=Object.entries(d.cats).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([c,v])=>`${esc(c)} ${money(v)}`).join(' · ');
+    return `<div class="insightRow exceptionalInsight"><div><b>${esc(type)}</b><small>${d.count} עסקאות · עיקר ההוצאה: ${cats||'אין פירוט קטגוריות'}</small></div><strong>${money(d.total)}</strong></div>`;
+  }).join('');
+  const total=arr.reduce((s,t)=>s+num(t.amount),0);
+  return `<div class="warn"><b>סה״כ חריגות:</b> ${money(total)}. המספר הזה מוצג בנפרד כדי שתדע איך נראה החודש בלי אירועים חד־פעמיים.</div><div class="insightList">${rows}</div>`;
+}
+function memberInsights(arr){
+  if(!arr.length)return '<div class="hint">אין עדיין נתונים לפי בני משפחה.</div>';
+  const data={};
+  arr.forEach(t=>{
+    const ms=t.members&&t.members.length?t.members:parseMembers(t.member||'משפחה');
+    ms.forEach(m=>{
+      const part=num(t.amount)*num(m.percent)/100;
+      const d=data[m.member]||(data[m.member]={total:0,regular:0,exceptional:0,cats:{},count:0});
+      d.total+=part; d.count++;
+      if(t.exceptional)d.exceptional+=part; else d.regular+=part;
+      const cat=normalizeCategoryName(t.category||'אחר');
+      d.cats[cat]=(d.cats[cat]||0)+part;
+    });
+  });
+  return `<div class="memberInsightGrid">${Object.entries(data).sort((a,b)=>b[1].total-a[1].total).map(([name,d])=>{
+    const cats=Object.entries(d.cats).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([c,v])=>`<span>${esc(c)} <b>${money(v)}</b></span>`).join('');
+    return `<div class="memberInsight"><h4><span class="memdot" style="background:${memberColors[name]||'#64748b'}"></span>${esc(name)} <strong>${money(d.total)}</strong></h4><p>רגיל ${money(d.regular)} · חריג ${money(d.exceptional)} · ${d.count} שיוכים</p><div class="chipLine">${cats}</div></div>`;
+  }).join('')}</div>`;
+}
 
 function bindAfterRender(){fileInput.onchange=importFiles; restoreInput.onchange=restoreBackup}
-function addMoney(t){const n=document.getElementById('n_'+t).value.trim(), a=num(document.getElementById('a_'+t).value); if(!n)return; state[t].push({id:id(),name:n,amount:a,category:t==='offsets'?'קיזוז':'אחר'}); persist()}
+function addMoney(t){const n=document.getElementById('n_'+t).value.trim(), a=num(document.getElementById('a_'+t).value); if(!n)return; state[t].push({id:id(),name:n,amount:a,category:t==='offsets'?'קיזוז':'אחר',year:state.year,month:state.month}); persist()}
 function updMoney(t,i,k,v){const x=state[t].find(y=>y.id===i); if(x){x[k]=k==='amount'?num(v):v; persist()}}
 function delMoney(t,i){state[t]=state[t].filter(x=>x.id!==i); persist()}
 function sortTx(a,b){return String(a.card||'').localeCompare(String(b.card||''),'he',{numeric:true})||String(a.date||'').localeCompare(String(b.date||''))||String(a.merchant||'').localeCompare(String(b.merchant||''),'he')||num(a.amount)-num(b.amount)}
